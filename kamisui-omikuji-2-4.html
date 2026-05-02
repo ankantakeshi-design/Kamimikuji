@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>本日の火水おみくじ 🔥☔｜心体調整塾</title>
+<meta name="description" content="今日の火水からのメッセージを引こう。毎日ランダムで60種類の応援メッセージ。">
+<meta property="og:title" content="本日の火水おみくじ 🔥☔｜心体調整塾">
+<meta property="og:description" content="今日の火水からのメッセージを引こう。30種類の応援メッセージ。">
+<meta property="og:url" content="https://kamimikuji.pages.dev">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fire: #D94F1E;
+  --fire2: #FF7A40;
+  --water: #1A5FB8;
+  --water2: #4A9EF5;
+  --dark: #0F0F1A;
+  --mid: #5A5A7A;
+  --cream: #FAFAF5;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:auto;}
+
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:var(--dark);
+  color:white;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── ORB BG ── */
+.bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.orb{
+  position:absolute;border-radius:50%;filter:blur(90px);
+  animation:orbDrift 14s ease-in-out infinite alternate;
+}
+.orb-fire{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(217,79,30,0.35),transparent 70%);
+  top:-150px;left:-150px;
+}
+.orb-water{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(26,95,184,0.35),transparent 70%);
+  bottom:-150px;right:-150px;
+  animation-direction:alternate-reverse;
+}
+.orb-mid{
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(150,100,200,0.15),transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation-duration:20s;
+}
+@keyframes orbDrift{
+  from{transform:translate(0,0) scale(1);}
+  to{transform:translate(30px,30px) scale(1.08);}
+}
+
+/* ── NOISE ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.4;
+}
+
+/* ── LAYOUT ── */
+.container{
+  position:relative;z-index:1;
+  max-width:520px;
+  margin:0 auto;
+  padding:48px 24px 80px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+}
+
+/* ── HEADER ── */
+.site-badge{
+  font-size:11px;letter-spacing:4px;
+  color:rgba(255,255,255,0.35);
+  text-transform:uppercase;
+  margin-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  padding-bottom:16px;
+  width:100%;text-align:center;
+}
+
+.title-area{text-align:center;margin-bottom:48px;}
+.kigo{font-size:40px;margin-bottom:12px;animation:floatIcon 4s ease-in-out infinite;}
+@keyframes floatIcon{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+.main-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(22px,6vw,32px);
+  font-weight:900;
+  letter-spacing:3px;
+  background:linear-gradient(135deg,#FF9060,#ffffff 50%,#6AC0FF);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:8px;
+}
+.catch-copy{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(13px,3.2vw,16px);
+  font-weight:400;
+  letter-spacing:3px;
+  line-height:2.2;
+  margin-bottom:12px;
+  background:linear-gradient(135deg,#FF9060 0%,#ffffff 50%,#6AC0FF 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.sub-title{
+  font-size:12px;letter-spacing:2px;
+  color:rgba(255,255,255,0.4);
+  line-height:1.8;
+}
+
+/* ── CARD ── */
+.card-area{
+  width:100%;
+  margin-bottom:40px;
+  display:none;
+}
+.card-area.show{display:block;}
+
+.omikuji-card{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:4px;
+  padding:40px 32px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:border-color 0.5s;
+}
+.omikuji-card.revealed{
+  border-color:rgba(255,255,255,0.2);
+}
+
+/* カードの上下ライン */
+.omikuji-card::before,.omikuji-card::after{
+  content:'';position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,rgba(217,79,30,0),rgba(217,79,30,0.6),rgba(26,95,184,0.6),rgba(26,95,184,0));
+}
+.omikuji-card::before{top:0;}
+.omikuji-card::after{bottom:0;}
+
+.card-bg-glow{
+  position:absolute;inset:0;opacity:0;
+  transition:opacity 0.8s;
+  pointer-events:none;
+}
+.omikuji-card.revealed .card-bg-glow{opacity:1;}
+
+/* 初期状態 */
+.pre-state{
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+}
+.pre-icon{font-size:56px;opacity:0.4;}
+.pre-text{
+  font-size:14px;letter-spacing:2px;
+  color:rgba(255,255,255,0.3);
+}
+
+/* 結果状態 */
+.result-state{
+  display:none;
+  flex-direction:column;align-items:center;gap:0;
+  width:100%;
+}
+.omikuji-card.revealed .pre-state{display:none;}
+.omikuji-card.revealed .result-state{display:flex;}
+
+.result-element-badge{
+  font-size:11px;letter-spacing:3px;
+  padding:4px 16px;
+  border:1px solid rgba(255,255,255,0.2);
+  color:rgba(255,255,255,0.5);
+  margin-bottom:20px;
+  border-radius:20px;
+}
+
+.result-emoji{
+  font-size:48px;margin-bottom:16px;
+  animation:popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes popIn{
+  from{transform:scale(0);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+.result-keyword{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(20px,5vw,26px);
+  font-weight:900;
+  letter-spacing:2px;
+  margin-bottom:20px;
+  line-height:1.4;
+}
+
+.result-message{
+  font-size:14px;
+  line-height:2;
+  color:rgba(255,255,255,0.75);
+  max-width:380px;
+  margin-bottom:20px;
+}
+
+.result-support{
+  font-size:12px;letter-spacing:1px;
+  color:rgba(255,255,255,0.35);
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  width:100%;
+  text-align:center;
+}
+
+/* ── DRAW BUTTON ── */
+.draw-btn{
+  width:100%;
+  max-width:320px;
+  padding:20px 0;
+  font-family:'Noto Serif JP',serif;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:3px;
+  border:none;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.3s;
+  margin-bottom:16px;
+  background:white;
+  color:var(--dark);
+}
+.draw-btn::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--fire2),var(--water2));
+  opacity:0;transition:opacity 0.3s;
+}
+.draw-btn:hover{color:white;}
+.draw-btn:hover::after{opacity:1;}
+.draw-btn span{position:relative;z-index:1;}
+
+.draw-btn:disabled{
+  opacity:0.4;cursor:not-allowed;
+}
+.draw-btn:disabled:hover{color:var(--dark);}
+.draw-btn:disabled:hover::after{opacity:0;}
+
+.retry-text{
+  font-size:12px;color:rgba(255,255,255,0.3);
+  letter-spacing:1px;text-align:center;
+}
+
+/* ── SHARE SECTION ── */
+.share-area{
+  width:100%;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin-bottom:40px;
+  animation:fadeUp 0.6s ease forwards;
+}
+.share-area.show{display:flex;}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.share-label{
+  font-size:11px;letter-spacing:3px;
+  color:rgba(255,255,255,0.35);
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.share-btns{
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+}
+
+.share-btn{
+  padding:12px 24px;
+  border:none;cursor:pointer;
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:1px;
+  display:flex;align-items:center;gap:8px;
+  transition:all 0.2s;
+  border-radius:2px;
+}
+.share-btn.line{background:#00B900;color:white;}
+.share-btn.line:hover{opacity:0.85;}
+.share-btn.x{background:#000;color:white;border:1px solid #333;}
+.share-btn.x:hover{background:#222;}
+.share-btn.copy{background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);}
+.share-btn.copy:hover{background:rgba(255,255,255,0.2);}
+
+/* ── FOOTER CTA ── */
+.footer-cta{
+  width:100%;
+  margin-top:48px;
+  position:relative;
+}
+
+.footer-cta-inner{
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+  padding:2px;
+  background:linear-gradient(135deg,var(--fire),var(--water2),var(--fire2),var(--water));
+  background-size:300% 300%;
+  animation:gradShift 4s ease infinite;
+}
+@keyframes gradShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.footer-cta-body{
+  background:#12122A;
+  border-radius:10px;
+  padding:32px 24px 28px;
+  text-align:center;
+  position:relative;
+}
+
+.footer-cta-eyebrow{
+  font-size:10px;
+  letter-spacing:4px;
+  color:rgba(255,255,255,0.4);
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+.footer-cta-message{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(20px,5.5vw,26px);
+  line-height:1.6;
+  letter-spacing:2px;
+  margin-bottom:10px;
+  background:linear-gradient(135deg,#FF9060,#ffffff 55%,#6AC0FF);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-weight:900;
+}
+
+.footer-cta-sub{
+  font-size:clamp(14px,3.8vw,17px);
+  color:rgba(255,255,255,0.75);
+  letter-spacing:1px;
+  line-height:1.9;
+  margin-bottom:24px;
+  font-weight:500;
+}
+
+.footer-cta-note{
+  margin-top:18px;
+  font-size:11px;
+  color:rgba(255,255,255,0.35);
+  letter-spacing:1px;
+  line-height:1.9;
+}
+
+.footer-cta-link{
+  display:block;
+  padding:18px 24px;
+  background:linear-gradient(135deg,var(--fire),var(--fire2) 40%,var(--water2) 70%,var(--water));
+  background-size:200% 200%;
+  animation:gradShift 4s ease infinite;
+  color:white;
+  text-decoration:none;
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(14px,3.8vw,17px);
+  font-weight:700;
+  letter-spacing:2px;
+  border-radius:8px;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 4px 24px rgba(217,79,30,0.35),0 4px 24px rgba(26,95,184,0.25);
+}
+.footer-cta-link:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(217,79,30,0.5),0 8px 32px rgba(26,95,184,0.4);
+}
+.footer-cta-link:active{transform:translateY(0);}
+
+.footer-cta-arrow{
+  font-size:18px;margin-right:8px;
+  display:inline-block;
+  animation:bounceX 1.2s ease-in-out infinite;
+}
+@keyframes bounceX{
+  0%,100%{transform:translateX(0);}
+  50%{transform:translateX(5px);}
+}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:32px;left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--dark);color:white;
+  padding:14px 28px;font-size:13px;letter-spacing:1px;
+  z-index:10000;transition:transform 0.3s ease;
+  border:1px solid rgba(255,255,255,0.15);
+  pointer-events:none;
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* shake animation */
+@keyframes shake{
+  0%,100%{transform:rotate(0);}
+  20%{transform:rotate(-8deg);}
+  40%{transform:rotate(8deg);}
+  60%{transform:rotate(-5deg);}
+  80%{transform:rotate(5deg);}
+}
+.shaking{animation:shake 0.5s ease;}
+</style>
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb-fire"></div>
+  <div class="orb orb-water"></div>
+  <div class="orb orb-mid"></div>
+</div>
+
+<div class="container">
+
+  <div class="site-badge">心体調整塾｜Shintai Choseijuku</div>
+
+  <div class="title-area">
+    <div class="kigo">🔥☔</div>
+    <div class="main-title">本日の火水おみくじ</div>
+    <div class="catch-copy">
+      自分らしく生きやすくなる<br>
+      メッセージ
+    </div>
+    <div class="sub-title">全60種類・ランダム</div>
+  </div>
+
+  <div class="card-area" id="card-area">
+    <div class="omikuji-card" id="omikuji-card">
+      <div class="card-bg-glow" id="card-bg-glow"></div>
+
+
+      <div class="result-state" id="result-state">
+        <div class="result-element-badge" id="result-badge"></div>
+        <div class="result-emoji" id="result-emoji"></div>
+        <div class="result-keyword" id="result-keyword"></div>
+        <div class="result-message" id="result-message"></div>
+        <div class="result-support" id="result-support"></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="draw-btn" id="draw-btn" onclick="drawOmikuji()">
+    <span id="btn-text">🎴 おみくじを引く</span>
+  </button>
+  <div class="retry-text" id="retry-text"></div>
+
+  <div class="share-area" id="share-area">
+    <div class="share-label">シェアする</div>
+    <div class="share-btns">
+      <button class="share-btn line" onclick="shareToLine()">🟢 LINE</button>
+      <button class="share-btn x" onclick="shareToX()">𝕏 ポスト</button>
+      <button class="share-btn copy" onclick="copyText()">📋 おみくじコピー</button>
+    </div>
+  </div>
+
+  <div class="footer-cta">
+    <div class="footer-cta-inner">
+      <div class="footer-cta-body">
+        <div class="footer-cta-eyebrow">本格診断</div>
+        <div class="footer-cta-message">
+          あなたの火水性質 12タイプ🔥☔
+        </div>
+        <div class="footer-cta-sub">30問の診断であなたのタイプがわかる</div>
+        <a class="footer-cta-link" href="https://kamisindan.pages.dev">
+          <span class="footer-cta-arrow">▶</span>🔥☔ 火水性質診断（30問）を受ける
+        </a>
+        <div class="footer-cta-note">成熟度が100%に育つほど、自分らしく生きやすくなるよ👍🏻✨</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════
+// おみくじデータ 60種類
+// ══════════════════════════════
+const OMIKUJI = [
+  // 🔥 火系 (20種)
+  {
+    element:'🔥 火のメッセージ', emoji:'🔥', color:'rgba(217,79,30,0.2)',
+    keyword:'自分の意見を、今日は言葉にしてみよう',
+    message:'黙って合わせることが「優しさ」とは限りません。\nあなたの言葉を、誰かが待っています。',
+    support:'火の成熟度が上がると、自分の声を持てるようになります。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🔥', color:'rgba(217,79,30,0.2)',
+    keyword:'怒りは、あなたを守るサインだ',
+    message:'怒りを感じたとき、それを消そうとしないで。\n「何を守りたいのか」を聞いてみてください。',
+    support:'怒りと上手につきあうことが、火の成熟への一歩です。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🌋', color:'rgba(217,79,30,0.2)',
+    keyword:'迷ったら、動いてみよう',
+    message:'完璧な答えを待っていたら、一生動けないかもしれない。\n小さく動くことが、あなたの火を育てます。',
+    support:'決断のたびに、あなたの火は少しずつ成熟していきます。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🕯️', color:'rgba(217,79,30,0.2)',
+    keyword:'断ることは、自分を守る愛だ',
+    message:'「NO」と言えることは、わがままではありません。\n自分を守ることで、本当に大切な人を守れます。',
+    support:'健全な境界線が引けることが、成熟した火のあかしです。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'⚡', color:'rgba(217,79,30,0.2)',
+    keyword:'あなたのエネルギーは、本物だ',
+    message:'そのパワーを「どこに向けるか」だけを今日は意識してみて。\n方向が定まれば、あなたは誰よりも遠くへ行ける。',
+    support:'火のエネルギーは、磨くほどに輝きます。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🔥', color:'rgba(217,79,30,0.2)',
+    keyword:'今日一つ、やると決めて動こう',
+    message:'大きな変化は、小さな「やり切り」の積み重ねから。\n完了の感覚が、あなたの火を強くします。',
+    support:'やり切る体験のひとつひとつが、火の成熟につながります。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🦁', color:'rgba(217,79,30,0.2)',
+    keyword:'あなたの「正義感」は才能だ',
+    message:'不公平に怒れることは、誰にでもできることじゃない。\nその感覚を信じて、今日も前を向いて。',
+    support:'成熟した火は、正義を「建設的に」動かす力になります。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🎯', color:'rgba(217,79,30,0.2)',
+    keyword:'「私はこう思う」と、声に出そう',
+    message:'主語を「私」にするだけで、言葉の重さが変わります。\n今日一回、自分の感覚を言葉にしてみて。',
+    support:'自分軸の言葉を持つことが、火の成熟への道です。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🌅', color:'rgba(217,79,30,0.2)',
+    keyword:'過去の自分を、許してあげよう',
+    message:'あのとき怒りすぎたこと、後悔しているかもしれない。\nでも、あなたはその経験から学べる存在です。',
+    support:'自己嫌悪のループを抜けることが、火の成熟です。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🔑', color:'rgba(217,79,30,0.2)',
+    keyword:'自分の「嫌だ」を、大切にしよう',
+    message:'「嫌だ」という感覚は、あなたの内側からの声。\n無視せず、その声に耳を傾けてみて。',
+    support:'自分の感覚を信じることが、火の成熟の入口です。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🏹', color:'rgba(217,79,30,0.2)',
+    keyword:'今日の目標を、一つだけ決めよう',
+    message:'あれもこれもじゃなくていい。\n「今日はこれだけ」と決めた人は、確実に前に進めます。',
+    support:'小さな決断の積み重ねが、火の成熟を育てます。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🌄', color:'rgba(217,79,30,0.2)',
+    keyword:'後回しにしていたこと、今日やってみよう',
+    message:'「いつかやろう」は、来ないことが多い。\n5分だけでいい、今日動いてみて。',
+    support:'行動の感覚を体に覚えさせることが、火を育てます。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🧱', color:'rgba(217,79,30,0.2)',
+    keyword:'自分を守る「壁」を、一つ作ろう',
+    message:'全部受け入れなくていい。\nあなたにとって大切なものを、今日一つ守ってみて。',
+    support:'境界線は、成熟した火が自然と持てるようになるものです。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🔆', color:'rgba(217,79,30,0.2)',
+    keyword:'あなたの「熱さ」は、誰かの光になっている',
+    message:'情熱的でいることを、恥ずかしいと思わないで。\nあなたの本気が、周りを動かしています。',
+    support:'成熟した火は、人を照らす力になります。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'💪', color:'rgba(217,79,30,0.2)',
+    keyword:'弱音を吐くことも、強さだ',
+    message:'「もう無理」と言える人は、自分に正直でいられる人。\n強がらなくていい、今日は誰かに話してみて。',
+    support:'自分の限界を知ることが、成熟した火の使い方です。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🎖️', color:'rgba(217,79,30,0.2)',
+    keyword:'今日の「できた」を、ちゃんと認めよう',
+    message:'小さなことでいい。\n「今日これができた」と自分に言える習慣が、火を育てます。',
+    support:'自己承認の積み重ねが、揺るぎない自己軸になります。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🦅', color:'rgba(217,79,30,0.2)',
+    keyword:'流されていると気づいたら、立ち止まろう',
+    message:'誰かのペースに乗り続けていない？\n「私はどうしたいか」を、今日一回聞いてみて。',
+    support:'自分に立ち返る習慣が、火の成熟を深めます。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🌞', color:'rgba(217,79,30,0.2)',
+    keyword:'自己嫌悪が出たら「気づけた」と認めよう',
+    message:'自分を責めるより、気づいた自分を褒めてみて。\n気づきこそが、成長の証です。',
+    support:'自己観察と自己受容のセットが、火の成熟を加速します。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🔐', color:'rgba(217,79,30,0.2)',
+    keyword:'「ちゃんとしなきゃ」を、今日は手放そう',
+    message:'完璧でいようとする力が、あなたを疲れさせているかも。\n今日だけ、「これでいい」を試してみて。',
+    support:'完璧主義を緩めることが、火の成熟への入口です。'
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🎆', color:'rgba(217,79,30,0.2)',
+    keyword:'あなたの決断は、あなたにしかできない',
+    message:'誰かに決めてもらいたくなる日もある。\nでも最後は、あなたが選んだ道が一番あなたらしい。',
+    support:'自分で決める経験が、火の成熟の核になります。'
+  },
+
+  // ☔ 水系 (20種)
+  {
+    element:'☔ 水のメッセージ', emoji:'☔', color:'rgba(26,95,184,0.2)',
+    keyword:'今日は、ただ感じることを許そう',
+    message:'何かを解決しようとしなくていい。\nただ感じて、その感情を川のように流してみて。',
+    support:'感じることを許すことが、水の成熟への入口です。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌊', color:'rgba(26,95,184,0.2)',
+    keyword:'人を受け取る、その力があなたにある',
+    message:'あなたの共感力は、誰かの重荷を軽くしています。\nそれはとても稀有な才能です。',
+    support:'成熟した水は、流されずに受け取れる強さを持ちます。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'💧', color:'rgba(26,95,184,0.2)',
+    keyword:'頑張りすぎているなら、今日は休もう',
+    message:'休むことは、サボりじゃない。\nあなたが満たされていることが、周りへの一番の贈り物です。',
+    support:'自分を満たすことが、成熟した水の循環を生みます。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌧️', color:'rgba(26,95,184,0.2)',
+    keyword:'「断れなかった自分」を責めないで',
+    message:'断れないのは、あなたが優しいから。\n次の一歩を、小さく準備するだけでいい。',
+    support:'水の成熟とは、優しさを保ちながら境界線を持つことです。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🫂', color:'rgba(26,95,184,0.2)',
+    keyword:'あなたの「待てる力」は、強さだ',
+    message:'焦らず、じっくり育てる。\nその忍耐が、深い信頼関係を生んでいます。',
+    support:'成熟した水は、焦らず待つことで大きな実りをもたらします。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌙', color:'rgba(26,95,184,0.2)',
+    keyword:'感情を感じたら、日記に一言書こう',
+    message:'「今日、少し悲しかった」それだけでいい。\n書くことが、あなたの水を育てます。',
+    support:'感情を言語化する習慣が、水の成熟を加速させます。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🫧', color:'rgba(26,95,184,0.2)',
+    keyword:'あなたの洞察は、誰かを助けている',
+    message:'「あの人、疲れてるな」と気づけること。\nそのアンテナがあるだけで、世界は少し温かくなる。',
+    support:'成熟した水の洞察力は、深いつながりを生む力です。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'💙', color:'rgba(26,95,184,0.2)',
+    keyword:'人に頼ることは、弱さじゃない',
+    message:'「一人で抱えなきゃ」と思っていない？\n誰かに渡すことで、あなたも相手も楽になれる。',
+    support:'助けを求めることが、成熟した水の流れを作ります。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌿', color:'rgba(26,95,184,0.2)',
+    keyword:'今日は、誰かの話をただ聞いてみよう',
+    message:'アドバイスしなくていい。解決しなくていい。\nただそこにいるだけで、あなたは誰かの力になれる。',
+    support:'傾聴の力が、成熟した水の真骨頂です。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'☁️', color:'rgba(26,95,184,0.2)',
+    keyword:'自分を許すことから、始めよう',
+    message:'完璧じゃなくていい。\nまず自分に「それでいい」と言えたとき、水が流れ始めます。',
+    support:'自己受容が深まるほど、水の成熟度は上がっていきます。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌱', color:'rgba(26,95,184,0.2)',
+    keyword:'「ありがとう」を素直に受け取ろう',
+    message:'褒められたとき、すぐに否定していない？\n「ありがとうございます」と受け取ることも、水の練習です。',
+    support:'受け取れる力が育つと、水の成熟が一気に深まります。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌬️', color:'rgba(26,95,184,0.2)',
+    keyword:'今日は、深呼吸から始めよう',
+    message:'息を吐き切ると、自然と入ってくる。\n水も感情も、出してこそ入ってきます。',
+    support:'呼吸を整えることが、水のリズムを取り戻す最初の一歩です。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🎐', color:'rgba(26,95,184,0.2)',
+    keyword:'揺れていい。それが水の本質だ',
+    message:'ブレることを恐れていない？\n揺れながら、少しずつ深くなっていく。それが水です。',
+    support:'揺れることを許すことが、水の成熟を育てます。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🪷', color:'rgba(26,95,184,0.2)',
+    keyword:'傷ついた経験が、あなたの深さになっている',
+    message:'痛かった記憶は、消えなくていい。\nその経験が、あなたの共感力の根っこです。',
+    support:'傷を抱えながら成熟することが、水の本当の強さです。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌻', color:'rgba(26,95,184,0.2)',
+    keyword:'今日一つ、自分のために何かしよう',
+    message:'誰かのためじゃなく、今日は自分のために。\n好きな食べ物でも、ゆっくりお風呂でも。',
+    support:'自分を大切にする習慣が、水の成熟の土台です。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌔', color:'rgba(26,95,184,0.2)',
+    keyword:'静かな夜に、自分の内側と対話しよう',
+    message:'忙しさの中では聞こえない声がある。\n今夜、少しだけ静かな時間を作ってみて。',
+    support:'内観の時間が、水の成熟を深めます。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'💦', color:'rgba(26,95,184,0.2)',
+    keyword:'感謝を、今日誰かに伝えよう',
+    message:'思っていても言えていないことがある。\n一言でいい、今日伝えてみて。',
+    support:'感謝を表現する力が、成熟した水のつながりを生みます。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🩵', color:'rgba(26,95,184,0.2)',
+    keyword:'あなたの「優しさ」は、本物だ',
+    message:'優しくしすぎて疲れることもある。\nでもその優しさは、あなたの本質です。大切に。',
+    support:'優しさを保ちながら自分を守る。それが水の成熟です。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🫶', color:'rgba(26,95,184,0.2)',
+    keyword:'誰かの痛みに気づける、あなたは繊細だ',
+    message:'「気にしすぎ」と言われることもあるかもしれない。\nでも気づける力は、確かな才能です。',
+    support:'成熟した水は、繊細さを強さに変えます。'
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🏞️', color:'rgba(26,95,184,0.2)',
+    keyword:'今日は、流れに身を任せてみよう',
+    message:'全部コントロールしなくていい。\n今日は少し力を抜いて、流れを感じてみて。',
+    support:'委ねることのできる柔軟性が、水の成熟の証です。'
+  },
+
+  // 🔥☔ 火水バランス系 (20種)
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'⚖️', color:'rgba(150,100,200,0.2)',
+    keyword:'火と水、どちらも今日のあなたに必要だ',
+    message:'強くもあり、柔らかくもある。\nそのバランスが、あなたらしさをつくっています。',
+    support:'火と水の両方を育てることが、生きやすさにつながります。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌈', color:'rgba(150,100,200,0.2)',
+    keyword:'揺れている今日も、成長の途中だ',
+    message:'「なんで自分はこうなんだろう」と思う日もある。\nでも揺れることは、育っている証拠です。',
+    support:'揺れながら育つ。それが火水の成熟のプロセスです。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'✨', color:'rgba(150,100,200,0.2)',
+    keyword:'あなたの中の火と水は、今日も働いている',
+    message:'意識していなくても、あなたの中で火と水は動いています。\nその感覚に、少しだけ耳を傾けてみて。',
+    support:'気づくことが、火水の成熟への一番の近道です。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌓', color:'rgba(150,100,200,0.2)',
+    keyword:'強さの中に、優しさがある',
+    message:'本当に強い人は、やさしくいられます。\nあなたの火が成熟するほど、水も自然と深まります。',
+    support:'火と水は、一方が育つともう一方も引き上げられます。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌺', color:'rgba(150,100,200,0.2)',
+    keyword:'今日の「気持ち」に名前をつけよう',
+    message:'「なんかモヤモヤ」ではなく、「悔しい」「寂しい」「嬉しい」。\n名前をつけるだけで、感情が動き始めます。',
+    support:'感情の言語化は、火水の成熟を深める大切な習慣です。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🪴', color:'rgba(150,100,200,0.2)',
+    keyword:'人間関係に疲れたなら、一人の時間をとろう',
+    message:'社交的でいなくてもいい。\n一人で静かにいられることが、あなたの火水を整えます。',
+    support:'自分を充電する時間が、火水バランスを取り戻させます。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🎋', color:'rgba(150,100,200,0.2)',
+    keyword:'「うまくいかない」も、データだ',
+    message:'失敗や迷いも、あなたを知るための情報。\n責めずに観察するだけで、次が変わります。',
+    support:'自己観察の習慣が、火水の成熟を加速させます。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌸', color:'rgba(150,100,200,0.2)',
+    keyword:'今日のあなたは、十分よくやっている',
+    message:'もっとできたかも、と思う日もある。\nでも今日のあなたは、今日できる精一杯をやっています。',
+    support:'自分を認めることが、火水の成熟の土台です。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌟', color:'rgba(150,100,200,0.2)',
+    keyword:'あなたの「生きにくさ」には、理由がある',
+    message:'なぜか生きづらい、そう感じているなら。\nそれは火水のどちらかに、磨く余地があるサインかもしれない。',
+    support:'生きやすさは、火水の成熟度と深くつながっています。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🔥☔', color:'rgba(150,100,200,0.2)',
+    keyword:'自分らしく生きることは、練習できる',
+    message:'生まれつきの個性だけじゃない。\n火と水を育てることで、自分らしさはもっと開いていきます。',
+    support:'火水の成熟度をあげて、自分らしく生きやすくなろう。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌍', color:'rgba(150,100,200,0.2)',
+    keyword:'今日の自分を、ただ観察してみよう',
+    message:'「なんでこう感じるんだろう」と責めずに、ただ見る。\n観察者になるだけで、火水のバランスが整います。',
+    support:'自己観察こそ、火水の成熟を育てる最大の習慣です。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌀', color:'rgba(150,100,200,0.2)',
+    keyword:'変わろうとする気持ちが、すでに成熟だ',
+    message:'「もっとよくなりたい」と思えること自体、すごいことです。\nその気持ちを、今日も大切に。',
+    support:'変化への意欲が、火水の成熟を動かす原動力です。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🧘', color:'rgba(150,100,200,0.2)',
+    keyword:'体の感覚に、今日は意識を向けよう',
+    message:'心の状態は、体に現れます。\n肩が張っていたら、少し緩めてみて。',
+    support:'体と心をつなぐ感覚が、火水の統合を深めます。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🗺️', color:'rgba(150,100,200,0.2)',
+    keyword:'今いる場所が、スタート地点だ',
+    message:'どこから来たかより、今どこにいるかが大事。\n今日の自分から、始めればいい。',
+    support:'今を受け入れることが、火水の成熟の出発点です。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🪐', color:'rgba(150,100,200,0.2)',
+    keyword:'あなたは、あなただけの火水を持っている',
+    message:'誰かと比べなくていい。\nあなたの火と水の組み合わせは、世界でただ一つです。',
+    support:'自分だけの個性を知ることが、火水の成熟の喜びです。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌾', color:'rgba(150,100,200,0.2)',
+    keyword:'小さな変化を、今日積み重ねよう',
+    message:'大きく変わろうとしなくていい。\n今日の小さな一歩が、半年後のあなたを変えます。',
+    support:'継続の力が、火水の成熟を確かなものにします。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🕊️', color:'rgba(150,100,200,0.2)',
+    keyword:'手放すことも、成長だ',
+    message:'固執していることはない？\n手放した先に、新しい火水の流れが生まれます。',
+    support:'執着を手放す勇気が、火水の成熟を次のステージへ連れていきます。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌤️', color:'rgba(150,100,200,0.2)',
+    keyword:'暗い日の後には、必ず光がある',
+    message:'今しんどいなら、それはまだ途中です。\n火と水は、嵐の後に必ず育ちます。',
+    support:'困難の中で育まれる成熟が、最も深い火水の力になります。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🎇', color:'rgba(150,100,200,0.2)',
+    keyword:'今日のあなたは、昨日より成熟している',
+    message:'気づかないほど小さくても、あなたは毎日育っています。\n今日の自分を、少し誇りに思って。',
+    support:'成熟は、積み重ねた時間の中に静かに宿ります。'
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'💫', color:'rgba(150,100,200,0.2)',
+    keyword:'火水の成熟度をあげて、生きやすくなろう',
+    message:'あなたが自分らしくいられる日を、増やしていきたい。\n火と水を育てることが、その一番の近道です。',
+    support:'心体調整塾は、あなたの火水の成熟を応援しています。'
+  },
+];
+
+let currentResult = null;
+let hasDrawn = false;
+
+function drawOmikuji() {
+  const card = document.getElementById('omikuji-card');
+  const btn = document.getElementById('draw-btn');
+
+  // shake animation
+  const kigo = document.querySelector('.kigo');
+  kigo.classList.remove('shaking');
+  void kigo.offsetWidth;
+  kigo.classList.add('shaking');
+  setTimeout(() => kigo.classList.remove('shaking'), 600);
+
+  // pick random
+  const idx = Math.floor(Math.random() * OMIKUJI.length);
+  currentResult = OMIKUJI[idx];
+
+  // set content
+  document.getElementById('result-badge').textContent = currentResult.element;
+  document.getElementById('result-emoji').textContent = currentResult.emoji;
+  document.getElementById('result-keyword').textContent = currentResult.keyword;
+  document.getElementById('result-message').textContent = currentResult.message;
+  document.getElementById('result-support').textContent = currentResult.support;
+
+  // glow color
+  const glow = document.getElementById('card-bg-glow');
+  glow.style.background = `radial-gradient(ellipse at center, ${currentResult.color}, transparent 70%)`;
+
+  // reveal
+  card.classList.add('revealed');
+  document.getElementById('card-area').classList.add('show');
+  document.getElementById('share-area').classList.add('show');
+
+  // button change
+  hasDrawn = true;
+  document.getElementById('btn-text').textContent = '🎴 もう一度引く';
+  document.getElementById('retry-text').textContent = '※ 今日のメッセージは毎回変わります';
+}
+
+function buildShareText() {
+  if (!currentResult) return '';
+  return `🔥☔ 本日の火水おみくじ｜心体調整塾\n\n${currentResult.emoji} ${currentResult.keyword}\n\n${currentResult.message}\n\n━━━━━━━━━━\n${currentResult.support}\n\n👇 あなたも引いてみて\nhttps://kamimikuji.pages.dev`;
+}
+
+function shareToLine() {
+  const text = buildShareText();
+  window.open(`https://line.me/R/share?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+function shareToX() {
+  if (!currentResult) return;
+  const text = `🔥☔ 本日の火水おみくじ\n\n${currentResult.emoji} ${currentResult.keyword}\n\n${currentResult.message}\n\n#火水性質診断 #心体調整塾\n`;
+  const url = 'https://kamimikuji.pages.dev';
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+}
+
+function copyText() {
+  const text = buildShareText();
+  if (!text) return;
+  // clipboard API (https環境)
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text)
+      .then(() => showToast('おみくじをコピーしました！'))
+      .catch(() => fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  const el = document.createElement('textarea');
+  el.value = text;
+  el.style.position = 'fixed';
+  el.style.left = '-9999px';
+  el.style.top = '0';
+  document.body.appendChild(el);
+  el.focus();
+  el.select();
+  try {
+    document.execCommand('copy');
+    showToast('おみくじをコピーしました！');
+  } catch(e) {
+    showToast('コピーできませんでした。手動でコピーしてください。');
+  }
+  document.body.removeChild(el);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>
