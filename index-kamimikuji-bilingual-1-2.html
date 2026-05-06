@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>本日の火水おみくじ 🔥☔｜心体調整塾</title>
+<meta name="description" content="今日の火水からのメッセージを引こう。毎日ランダムで60種類の応援メッセージ。">
+<meta property="og:title" content="本日の火水おみくじ 🔥☔｜心体調整塾">
+<meta property="og:description" content="今日の火水からのメッセージを引こう。毎日ランダムで60種類の応援メッセージ。">
+<meta property="og:url" content="https://kamimikuji.pages.dev">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="本日の火水おみくじ｜心体調整塾">
+<meta property="og:image" content="https://kamimikuji.pages.dev/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="本日の火水おみくじ 🔥☔｜心体調整塾">
+<meta name="twitter:description" content="今日の火水からのメッセージを引こう。毎日ランダムで60種類の応援メッセージ。">
+<meta name="twitter:image" content="https://kamimikuji.pages.dev/ogp.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YKVVXDTJKN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YKVVXDTJKN');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fire: #D94F1E;
+  --fire2: #FF7A40;
+  --water: #1A5FB8;
+  --water2: #4A9EF5;
+  --dark: #0F0F1A;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:var(--dark);
+  color:white;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── ORB BG ── */
+.bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.orb{
+  position:absolute;border-radius:50%;filter:blur(90px);
+  animation:orbDrift 14s ease-in-out infinite alternate;
+}
+.orb-fire{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(217,79,30,0.35),transparent 70%);
+  top:-150px;left:-150px;
+}
+.orb-water{
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(26,95,184,0.35),transparent 70%);
+  bottom:-150px;right:-150px;
+  animation-direction:alternate-reverse;
+}
+@keyframes orbDrift{
+  from{transform:translate(0,0) scale(1);}
+  to{transform:translate(30px,30px) scale(1.08);}
+}
+
+/* ── NOISE ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.4;
+}
+
+/* ── LAYOUT ── */
+.main-content{
+  position:relative;z-index:1;
+  max-width:520px;
+  margin:0 auto;
+  padding:48px 24px 80px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+}
+
+/* ── HEADER ── */
+.site-badge{
+  font-size:11px;letter-spacing:4px;
+  color:rgba(255,255,255,0.35);
+  text-transform:uppercase;
+  margin-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  padding-bottom:16px;
+  width:100%;text-align:center;
+}
+
+.title-area{text-align:center;margin-bottom:48px;}
+.kigo{font-size:40px;margin-bottom:12px;animation:floatIcon 4s ease-in-out infinite;}
+@keyframes floatIcon{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+.grad-text{
+  background:linear-gradient(135deg,#FF9060,#ffffff 50%,#6AC0FF);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.main-title{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(22px,6vw,32px);
+  font-weight:900;
+  letter-spacing:3px;
+  margin-bottom:8px;
+}
+.catch-copy{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(13px,3.2vw,16px);
+  font-weight:400;
+  letter-spacing:3px;
+  line-height:2.2;
+  margin-bottom:12px;
+}
+
+/* ── CARD ── */
+.card-area{
+  width:100%;
+  margin-bottom:40px;
+  display:none;
+}
+.card-area.show{display:block;}
+
+.omikuji-card{
+  width:100%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:4px;
+  padding:40px 32px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:border-color 0.5s;
+}
+.omikuji-card.revealed{
+  border-color:rgba(255,255,255,0.2);
+}
+
+/* カードの上下ライン */
+.omikuji-card::before,.omikuji-card::after{
+  content:'';position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,rgba(217,79,30,0),rgba(217,79,30,0.6),rgba(26,95,184,0.6),rgba(26,95,184,0));
+}
+.omikuji-card::before{top:0;}
+.omikuji-card::after{bottom:0;}
+
+.card-bg-glow{
+  position:absolute;inset:0;opacity:0;
+  transition:opacity 3.5s ease;
+  pointer-events:none;
+}
+.omikuji-card.revealed .card-bg-glow{opacity:1;}
+
+/* モヤオーバーレイ */
+.card-mist{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 50%, transparent 80%);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  opacity:1;
+  transition:opacity 3.0s ease 0.5s, backdrop-filter 3.5s ease 0.5s;
+  pointer-events:none;
+  z-index:2;
+  border-radius:4px;
+}
+.omikuji-card.revealed .card-mist{
+  opacity:0;
+  backdrop-filter:blur(0px);
+  -webkit-backdrop-filter:blur(0px);
+}
+
+/* 初期状態 */
+/* 結果状態 */
+.result-state{
+  display:none;
+  flex-direction:column;align-items:center;gap:0;
+  width:100%;
+}
+.omikuji-card.revealed .result-state{display:flex;}
+
+/* 各要素を順番に浮かび上がらせる */
+.omikuji-card.revealed .result-element-badge{
+  animation:mistClear 1.5s ease forwards;
+  animation-delay:1.0s;
+  opacity:0;
+}
+.omikuji-card.revealed .result-emoji{
+  animation:mistClear 1.5s ease forwards;
+  animation-delay:2.0s;
+  opacity:0;
+}
+.omikuji-card.revealed .result-keyword{
+  animation:mistClear 1.8s ease forwards;
+  animation-delay:3.0s;
+  opacity:0;
+}
+.omikuji-card.revealed .result-message{
+  animation:mistClear 1.8s ease forwards;
+  animation-delay:4.2s;
+  opacity:0;
+}
+.omikuji-card.revealed .result-support{
+  animation:mistClear 1.8s ease forwards;
+  animation-delay:5.4s;
+  opacity:0;
+}
+.omikuji-card.revealed .takechan-area{
+  animation:mistClear 2.5s ease forwards;
+  animation-delay:8.5s;
+  opacity:0;
+}
+
+@keyframes mistClear{
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.result-element-badge{
+  font-size:11px;letter-spacing:3px;
+  padding:4px 16px;
+  border:1px solid rgba(255,255,255,0.2);
+  color:rgba(255,255,255,0.5);
+  margin-bottom:20px;
+  border-radius:20px;
+}
+
+.result-emoji{
+  font-size:48px;margin-bottom:16px;
+}
+
+.result-keyword{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(20px,5vw,26px);
+  font-weight:900;
+  letter-spacing:2px;
+  margin-bottom:20px;
+  line-height:1.4;
+}
+
+.result-message{
+  font-size:14px;
+  line-height:2;
+  color:rgba(255,255,255,0.75);
+  max-width:380px;
+  margin-bottom:20px;
+}
+
+.result-support{
+  font-size:12px;letter-spacing:1px;
+  color:rgba(255,255,255,0.35);
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  width:100%;
+  text-align:center;
+}
+
+/* ── DRAW BUTTON ── */
+.draw-btn{
+  width:100%;
+  max-width:320px;
+  padding:20px 0;
+  font-family:'Noto Serif JP',serif;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:3px;
+  border:none;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.3s;
+  margin-bottom:16px;
+  background:white;
+  color:var(--dark);
+}
+.draw-btn::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--fire2),var(--water2));
+  opacity:0;transition:opacity 0.3s;
+}
+.draw-btn:hover{color:white;}
+.draw-btn:hover::after{opacity:1;}
+
+.draw-btn:disabled{
+  opacity:0.4;cursor:not-allowed;
+}
+.draw-btn:disabled:hover{color:var(--dark);}
+.draw-btn:disabled:hover::after{opacity:0;}
+
+/* ── RETRY BUTTON（もう一度引く・薄め） ── */
+.retry-btn{
+  display:none;
+  width:100%;
+  max-width:240px;
+  padding:10px 0;
+  font-family:'Noto Serif JP',serif;
+  font-size:13px;
+  font-weight:400;
+  letter-spacing:2px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:transparent;
+  color:rgba(255,255,255,0.35);
+  cursor:pointer;
+  transition:all 0.3s;
+  margin-top:8px;
+}
+.retry-btn:hover{
+  color:rgba(255,255,255,0.6);
+  border-color:rgba(255,255,255,0.4);
+}
+.retry-btn.show{display:block;}
+
+/* ── SHARE SECTION ── */
+.share-area{
+  width:100%;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin-bottom:40px;
+  animation:fadeUp 0.6s ease forwards;
+}
+.share-area.show{display:flex;}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.share-blessing{
+  font-family:'Noto Serif JP',serif;
+  font-size:18px;
+  font-weight:400;
+  letter-spacing:3px;
+  color:rgba(255,255,255,0.75);
+  text-align:center;
+  line-height:2;
+  margin-top:32px;
+  margin-bottom:40px;
+}
+
+.share-btn
+.share-btn.line:hover{opacity:0.85;}
+.share-btn
+.share-btn.x:hover{background:#222;}
+.share-btn
+.share-btn.copy:hover{background:rgba(255,255,255,0.2);}
+
+/* ── FOOTER CTA ── */
+.footer-cta{
+  width:100%;
+  margin-top:48px;
+  position:relative;
+}
+
+.footer-cta-inner{
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+  padding:2px;
+  background:linear-gradient(135deg,var(--fire),var(--water2),var(--fire2),var(--water));
+  background-size:300% 300%;
+  animation:gradShift 4s ease infinite;
+}
+@keyframes gradShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.footer-cta-body{
+  background:#12122A;
+  border-radius:10px;
+  padding:32px 24px 28px;
+  text-align:center;
+  position:relative;
+}
+
+.footer-cta-message{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(20px,5.5vw,26px);
+  line-height:1.6;
+  letter-spacing:2px;
+  margin-bottom:10px;
+  background:linear-gradient(135deg,#FF9060,#ffffff 55%,#6AC0FF);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-weight:900;
+}
+
+.footer-cta-sub{
+  font-size:clamp(14px,3.8vw,17px);
+  color:rgba(255,255,255,0.75);
+  letter-spacing:1px;
+  line-height:1.9;
+  margin-bottom:24px;
+  font-weight:500;
+}
+
+.footer-cta-link{
+  display:block;
+  padding:18px 24px;
+  background:linear-gradient(135deg,var(--fire),var(--fire2) 40%,var(--water2) 70%,var(--water));
+  background-size:200% 200%;
+  animation:gradShift 4s ease infinite;
+  color:white;
+  text-decoration:none;
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(14px,3.8vw,17px);
+  font-weight:700;
+  letter-spacing:2px;
+  border-radius:8px;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 4px 24px rgba(217,79,30,0.35),0 4px 24px rgba(26,95,184,0.25);
+}
+.footer-cta-link:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(217,79,30,0.5),0 8px 32px rgba(26,95,184,0.4);
+}
+.footer-cta-link:active{transform:translateY(0);}
+
+.footer-cta-arrow{
+  font-size:18px;margin-right:8px;
+  display:inline-block;
+  animation:bounceX 1.2s ease-in-out infinite;
+}
+@keyframes bounceX{
+  0%,100%{transform:translateX(0);}
+  50%{transform:translateX(5px);}
+}
+
+/* ── TAKECHAN MESSAGE ── */
+.takechan-area{
+  width:100%;
+  display:none;
+  margin-top:28px;
+  animation:fadeUp 0.7s ease forwards;
+}
+.takechan-area.show{display:block;}
+
+.takechan-bubble{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:16px;
+  padding:18px 20px;
+  position:relative;
+}
+.takechan-icon{
+  width:52px;height:52px;
+  border-radius:50%;
+  flex-shrink:0;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,0.2);
+  box-shadow:0 2px 12px rgba(0,0,0,0.4);
+}
+.takechan-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.takechan-name{
+  font-size:11px;
+  letter-spacing:2px;
+  color:rgba(255,255,255,0.4);
+  margin-bottom:4px;
+}
+.takechan-text{
+  font-size:14px;
+  line-height:2;
+  color:rgba(255,255,255,0.88);
+  font-weight:400;
+  white-space:pre-line;
+}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:32px;left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--dark);color:white;
+  padding:14px 28px;font-size:13px;letter-spacing:1px;
+  z-index:10000;transition:transform 0.3s ease;
+  border:1px solid rgba(255,255,255,0.15);
+  pointer-events:none;
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* ── LANG TOGGLE ── */
+.lang-toggle{
+  position:fixed;top:16px;right:16px;
+  z-index:10000;
+  display:flex;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px;
+  overflow:hidden;
+  backdrop-filter:blur(8px);
+}
+.lang-btn{
+  padding:7px 14px;
+  font-size:12px;
+  letter-spacing:1.5px;
+  font-weight:700;
+  background:transparent;
+  color:rgba(255,255,255,0.4);
+  border:none;
+  cursor:pointer;
+  transition:all 0.25s;
+}
+.lang-btn.active{
+  background:rgba(255,255,255,0.15);
+  color:white;
+}
+
+/* shake animation */
+@keyframes shake{
+  0%,100%{transform:rotate(0);}
+  20%{transform:rotate(-8deg);}
+  40%{transform:rotate(8deg);}
+  60%{transform:rotate(-5deg);}
+  80%{transform:rotate(5deg);}
+}
+.shaking{animation:shake 0.5s ease;}
+
+/* ── PROFILE ── */
+.profile-section{
+  width:100%;
+  margin-top:48px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;
+  padding:32px 24px;
+}
+.profile-inner{
+  display:flex;
+  gap:24px;
+  align-items:flex-start;
+}
+.profile-avatar-wrap{
+  position:relative;
+  flex-shrink:0;
+  width:88px;
+  height:88px;
+}
+.profile-avatar{
+  width:88px;
+  height:88px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid rgba(217,79,30,0.6);
+  display:block;
+  position:relative;
+  z-index:1;
+}
+.profile-avatar-fallback{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--fire),var(--water));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:32px;
+  font-weight:700;
+  z-index:0;
+}
+.profile-body{ flex:1; }
+
+.profile-name{
+  font-size:22px;
+  font-weight:700;
+  color:white;
+  font-family:'Noto Serif JP',serif;
+  line-height:1.2;
+}
+.profile-school{
+  font-size:12px;
+  color:rgba(255,122,64,0.9);
+  margin-top:3px;
+  margin-bottom:12px;
+  letter-spacing:2px;
+}
+.profile-bio{
+  font-size:12px;
+  color:rgba(255,255,255,0.6);
+  line-height:1.9;
+  margin-bottom:16px;
+}
+
+.profile-ig-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 20px;
+  background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
+  color:white;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:700;
+  border-radius:4px;
+  letter-spacing:1px;
+  transition:opacity 0.2s;
+}
+.profile-ig-btn:hover{ opacity:0.85; }
+@media(max-width:520px){
+  .profile-inner{flex-direction:column;align-items:center;text-align:center;}
+  
+  .profile-ig-btn{width:100%;justify-content:center;}
+}
+
+/* ── REVIEWS SECTION ── */
+.reviews-section {
+  width: 100%;
+  margin-top: 48px;
+}
+.reviews-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(16px, 4vw, 20px);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.review-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.review-card {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,215,0,0.2);
+}
+.review-card img {
+  width: 100%;
+  display: block;
+}
+.reviews-btn {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 16px 0;
+  text-align: center;
+  background: linear-gradient(135deg, #B8860B, #FFD700, #B8860B);
+  background-size: 200% 200%;
+  animation: gradShift 4s ease infinite;
+  color: #0F0F1A;
+  text-decoration: none;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(255,215,0,0.3);
+}
+.reviews-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,215,0,0.5);
+}
+</style>
+</head>
+<body>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btn-ja" onclick="setLang('ja')">JP</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="bg-orbs">
+  <div class="orb orb-fire"></div>
+  <div class="orb orb-water"></div>
+</div>
+
+<div class="main-content">
+
+  <div class="site-badge" data-ja="心体調整塾" data-en="Mind-Body Adjustment School">心体調整塾</div>
+
+  <div class="title-area">
+    <div class="kigo">🔥☔</div>
+    <div class="main-title grad-text" data-ja="本日の火水おみくじ" data-en="Today's Fire &amp; Water Oracle">本日の火水おみくじ</div>
+    <div class="catch-copy grad-text" data-ja="自分らしく生きやすくなる<br>メッセージ" data-en="Messages to help you live<br>more true to yourself">
+      自分らしく生きやすくなる<br>
+      メッセージ
+    </div>
+
+  </div>
+
+  <div class="card-area" id="card-area">
+    <div class="omikuji-card" id="omikuji-card">
+      <div class="card-bg-glow" id="card-bg-glow"></div>
+      <div class="card-mist"></div>
+
+      <div class="result-state">
+        <div class="result-element-badge" id="result-badge"></div>
+        <div class="result-emoji" id="result-emoji"></div>
+        <div class="result-keyword" id="result-keyword"></div>
+        <div class="result-message" id="result-message"></div>
+        <div class="result-support" id="result-support"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="takechan-area" id="takechan-area">
+    <div class="takechan-bubble">
+      <img class="takechan-icon" src="https://kamimikuji.pages.dev/P.jpg" alt="たけちゃん">
+      <div class="takechan-body">
+        <div class="takechan-name" id="takechan-name" data-ja="たけちゃんより 🔥☔" data-en="NAME &nbsp;·&nbsp; TAKECHAN 🔥☔">たけちゃんより 🔥☔</div>
+        <div class="takechan-text" id="takechan-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="draw-btn" id="draw-btn" onclick="drawOmikuji()" data-ja="🎴 おみくじを引く" data-en="🎴 Draw Your Oracle">🎴 おみくじを引く</button>
+  <div class="share-area" id="share-area">
+    <div class="share-blessing" data-ja="あなたのこころが<br>整いますように" data-en="May your heart and mind<br>find harmony">あなたのこころが<br>整いますように</div>
+    <button class="retry-btn" id="retry-btn" onclick="drawOmikuji(); window.scrollTo({top:0, behavior:'smooth'});" data-ja="🎴 もう一度引く" data-en="🎴 Draw Again">🎴 もう一度引く</button>
+  </div>
+
+  <div class="footer-cta">
+    <div class="footer-cta-inner">
+      <div class="footer-cta-body">
+        <div class="footer-cta-message" data-ja="あなたの火水性質<br>12タイプ🔥☔" data-en="Your Fire &amp; Water Nature<br>12 Types 🔥☔">
+          あなたの火水性質<br>12タイプ🔥☔
+        </div>
+        <div class="footer-cta-sub" data-ja="30問の診断であなたのタイプがわかる<br>✅ 無料・登録不要" data-en="Discover your type with 30 questions<br>✅ Free · No registration needed">30問の診断であなたのタイプがわかる<br>✅ 無料・登録不要</div>
+        <a class="footer-cta-link" href="https://kamisindan.pages.dev" data-ja="<span class=\'footer-cta-arrow\'>▶</span>🔥☔ 火水診断を受ける" data-en="<span class=\'footer-cta-arrow\'>▶</span>🔥☔ Take the Fire &amp; Water Test">
+          <span class="footer-cta-arrow">▶</span>🔥☔ 火水診断を受ける
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- プロフィール -->
+  <div class="profile-section">
+    <div class="profile-inner">
+      <div class="profile-avatar-wrap">
+        <img class="profile-avatar" src="https://kamimikuji.pages.dev/P.jpg" alt="たけちゃん" onerror="this.style.display='none'"/>
+        <div class="profile-avatar-fallback" data-ja="た" data-en="T">た</div>
+      </div>
+      <div class="profile-body">
+        <div class="profile-name" data-ja="たけちゃん" data-en="TAKECHAN">たけちゃん</div>
+        <div class="profile-school" data-ja="心体調整塾" data-en="Mind-Body Adjustment School">心体調整塾</div>
+        <div class="profile-bio"
+          data-ja="自身の病気や怪我と向き合うことから心と体のつながりに興味を持つ。<br><br>人間のメンタル構造について長年研究中。<br><br>□ 水泳・拳法・テコンドーで優勝。<br>□ 理工学系大学院修了。<br>□ 食品製造・エネルギー・防災設備関連の元技術者。<br>□ これまで多数の人生の相談にのっている。"
+          data-en="Developed a deep interest in the mind-body connection through personal experiences with illness and injury.<br><br>Long-term researcher of human mental structure.<br><br>□ Champion in swimming, martial arts &amp; taekwondo.<br>□ Completed graduate school in science &amp; engineering.<br>□ Former engineer in food, energy &amp; disaster prevention sectors.<br>□ Has counseled many people on life challenges.">
+          自身の病気や怪我と向き合うことから心と体のつながりに興味を持つ。<br><br>
+          人間のメンタル構造について長年研究中。<br><br>
+          □ 水泳・拳法・テコンドーで優勝。<br>
+          □ 理工学系大学院修了。<br>
+          □ 食品製造・エネルギー・防災設備関連の元技術者。<br>
+          □ これまで多数の人生の相談にのっている。
+        </div>
+        <p style="font-size:12px;letter-spacing:2px;color:rgba(255,255,255,0.45);margin-bottom:10px;" data-ja="Instagramをフォローする" data-en="Follow on Instagram">Instagramをフォローする</p>
+        <a class="profile-ig-btn" href="https://www.instagram.com/aitakeshi485" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @aitakeshi485
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 感想セクション -->
+  <div class="reviews-section">
+    <div class="reviews-title" data-ja="今までにいただいた感想" data-en="Testimonials">今までにいただいた感想</div>
+    <div class="review-cards">
+    <div class="review-card">
+      <img src="https://kamimikuji.pages.dev/A.jpg" alt="感想1">
+    </div>
+    <div class="review-card">
+      <img src="https://kamimikuji.pages.dev/B.jpg" alt="感想2">
+    </div>
+    <div class="review-card">
+      <img src="https://kamimikuji.pages.dev/C.jpg" alt="感想3">
+    </div>
+    <div class="review-card">
+      <img src="https://kamimikuji.pages.dev/D.jpg" alt="感想4">
+    </div>
+    </div>
+    <a class="reviews-btn" href="https://note.com/ankantakeshi/n/nfd1009a46e94" target="_blank">
+      <span data-ja="その他の感想はこちら ▶" data-en="More testimonials ▶">その他の感想はこちら ▶</span>
+    </a>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════
+// 言語管理
+// ══════════════════════════════
+let currentLang = 'ja';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.querySelectorAll('[data-ja]').forEach(el => {
+    el.innerHTML = el.getAttribute('data-' + lang) || el.innerHTML;
+  });
+  // takechan-name は display:none の親要素内にある場合も確実に更新
+  const tnEl = document.getElementById('takechan-name');
+  if (tnEl) tnEl.innerHTML = tnEl.getAttribute('data-' + lang);
+  if (currentResult) {
+    const d = lang === 'ja' ? currentResult : (currentResult.en || currentResult);
+    document.getElementById('result-badge').textContent = d.element;
+    document.getElementById('result-keyword').textContent = d.keyword;
+    document.getElementById('result-message').textContent = d.message;
+    document.getElementById('result-support').textContent = d.support;
+    document.getElementById('takechan-text').textContent = d.takechan || '';
+  }
+}
+
+// ══════════════════════════════
+// おみくじデータ 60種類
+// ══════════════════════════════
+const OMIKUJI = [
+  // 🔥 火系 (20種)
+  {
+    element:'🔥 火のメッセージ', emoji:'🔥', color:'rgba(217,79,30,0.2)',
+    keyword:'自分の意見を、今日は言葉にしてみよう',
+    message:'黙って合わせることが「優しさ」とは限りません。\nあなたの言葉を、誰かが待っています。',
+    support:'火の成熟度が上がると、自分の声を持てるようになります。',
+    takechan:'話す前のあの緊張、ちゃんとわかるよ。それでも声にしようとしてる、その誠実さが伝わってくるよ。',
+    en:{element:'🔥 Fire Message',keyword:'Put your opinion into words today',message:'Staying silent to \'be kind\' isn\'t always kindness.\nSomeone is waiting to hear your voice.',support:'As Fire matures, you find your own voice.',takechan:'I know that tension before you speak. The honesty in your effort to speak up really comes through.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🔥', color:'rgba(217,79,30,0.2)',
+    keyword:'怒りは、あなたを守るサインだ',
+    message:'怒りを感じたとき、それを消そうとしないで。\n「何を守りたいのか」を聞いてみてください。\n今日怒りを感じたら、一言だけ紙に書いてみて。',
+    support:'怒りと上手につきあうことが、火の成熟への一歩です。',
+    takechan:'その熱さ、押さえ込まなくていいよ。ちゃんと感じてるあなたでいてね。',
+    en:{element:'🔥 Fire Message',keyword:'Anger is a signal protecting you',message:'When you feel anger, don\'t try to erase it.\nAsk: \'What am I trying to protect?\'\nIf you feel angry today, write just one word on paper.',support:'Learning to work with anger is a step toward Fire\'s maturity.',takechan:'You don\'t have to suppress that heat. Stay the person who truly feels things.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🌋', color:'rgba(217,79,30,0.2)',
+    keyword:'迷ったら、動いてみよう',
+    message:'完璧な答えを待っていたら、一生動けないかもしれない。\n小さく動くことが、あなたの火を育てます。',
+    support:'決断のたびに、あなたの火は少しずつ成熟していきます。',
+    takechan:'動いてみた日のあなた、なんかいきいきしてるよ。',
+    en:{element:'🔥 Fire Message',keyword:'When in doubt, take action',message:'Waiting for the perfect answer might keep you stuck forever.\nTaking even a small step nurtures your Fire.',support:'With every decision, your Fire matures a little more.',takechan:'On the days you take action, there\'s something alive about you.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🕯️', color:'rgba(217,79,30,0.2)',
+    keyword:'断ることは、自分を守る愛だ',
+    message:'「NO」と言えることは、わがままではありません。\n自分を守ることで、本当に大切な人を守れます。',
+    support:'健全な境界線が引けることが、成熟した火のあかしです。',
+    takechan:'断れる人って、自分のことをちゃんと大切にしてる人だよ。かっこいいな、って思う。',
+    en:{element:'🔥 Fire Message',keyword:'Saying no is an act of self-love',message:'Being able to say \'NO\' isn\'t selfishness.\nProtecting yourself allows you to protect what truly matters.',support:'Being able to draw healthy boundaries is a sign of mature Fire.',takechan:'Someone who can say no is someone who truly values themselves. That\'s admirable.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'⚡', color:'rgba(217,79,30,0.2)',
+    keyword:'あなたのエネルギーは、本物だ',
+    message:'そのパワーを「どこに向けるか」だけを今日は意識してみて。\n方向が定まれば、あなたは誰よりも遠くへ行ける。\n今日一つ、「これに使う」と決めてみて。',
+    support:'火のエネルギーは、磨くほどに輝きます。',
+    takechan:'そのパワー、そばで感じるとなんかわくわくするんだよね。いい方向に向いたとき、一緒に喜ばせてね。',
+    en:{element:'🔥 Fire Message',keyword:'Your energy is real',message:'Just be mindful today of where you direct that power.\nOnce you find your direction, you can go further than anyone.\nDecide one thing today: \'I\'ll use it for this.\'',support:'Fire energy shines brighter the more it\'s refined.',takechan:'Your power, felt from nearby, is genuinely exciting. Let me celebrate with you when it finds its direction.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🔥', color:'rgba(217,79,30,0.2)',
+    keyword:'今日一つ、やると決めて動こう',
+    message:'大きな変化は、小さな「やり切り」の積み重ねから。\n完了の感覚が、あなたの火を強くします。',
+    support:'やり切る体験のひとつひとつが、火の成熟につながります。',
+    takechan:'やり抜いた夜って、なんか静かに満たされる感じがするよね。お疲れさま。',
+    en:{element:'🔥 Fire Message',keyword:'Decide one thing today and do it',message:'Big changes come from small, completed actions.\nThe feeling of finishing something strengthens your Fire.',support:'Every experience of following through connects to Fire\'s maturity.',takechan:'Nights after you\'ve carried something through have a quiet kind of fullness. Well done.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🦁', color:'rgba(217,79,30,0.2)',
+    keyword:'あなたの「正義感」は才能だ',
+    message:'不公平に怒れることは、誰にでもできることじゃない。\nその感覚を信じて、今日も前を向いて。\n今日その感覚を、一言だれかに伝えてみて。',
+    support:'成熟した火は、正義を「建設的に」動かす力になります。',
+    takechan:'誰かのために怒れるって、あったかい人だよ。そういうあなたのこと、ずっと応援してる。',
+    en:{element:'🔥 Fire Message',keyword:'Your sense of justice is a talent',message:'Not everyone can get angry at unfairness.\nTrust that feeling and keep facing forward.\nShare it with someone today — just one word.',support:'Mature Fire turns a sense of justice into constructive action.',takechan:'Someone who can get angry for others has a warm heart. I\'m always cheering for you.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🎯', color:'rgba(217,79,30,0.2)',
+    keyword:'「私はこう思う」と、声に出そう',
+    message:'主語を「私」にするだけで、言葉の重さが変わります。\n今日一回、自分の感覚を言葉にしてみて。',
+    support:'自分軸の言葉を持つことが、火の成熟への道です。',
+    takechan:'自分の声を言葉にできたとき、あなたがもっと輝いて見えるよ。',
+    en:{element:'🔥 Fire Message',keyword:'Say out loud: \'I think...\'',message:'Just making yourself the subject changes the weight of your words.\nTry putting your feelings into words once today.',support:'Having words that come from your own center is the path to Fire\'s maturity.',takechan:'When you can voice your own perspective, you seem to shine even more.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🌅', color:'rgba(217,79,30,0.2)',
+    keyword:'過去の自分を、許してあげよう',
+    message:'あのとき怒りすぎたこと、後悔しているかもしれない。\nでも、あなたはその経験から学べる存在です。',
+    support:'自己嫌悪のループを抜けることが、火の成熟です。',
+    takechan:'あのときの自分を、もう責めなくていいよ。本当に真剣に生きてきたんだから。',
+    en:{element:'🔥 Fire Message',keyword:'Forgive who you used to be',message:'Maybe you got too angry back then and regret it.\nBut you\'re someone who can learn from that experience.',support:'Breaking free from the loop of self-criticism is Fire\'s maturity.',takechan:'You don\'t have to blame yourself for back then anymore. You\'ve been living with real sincerity.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🔑', color:'rgba(217,79,30,0.2)',
+    keyword:'自分の「嫌だ」を、大切にしよう',
+    message:'「嫌だ」という感覚は、あなたの内側からの声。\n無視せず、その声に耳を傾けてみて。',
+    support:'自分の感覚を信じることが、火の成熟の入口です。',
+    takechan:'そのざわざわ、無視しないでいてくれてよかった。あなたの感覚、信じてね。',
+    en:{element:'🔥 Fire Message',keyword:'Honor your \'I don\'t like this\'',message:'That feeling is a voice from inside you.\nDon\'t ignore it — listen to what it\'s saying.',support:'Trusting your own feelings is the doorway to Fire\'s maturity.',takechan:'I\'m glad you didn\'t dismiss that uneasy feeling. Trust your instincts.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🏹', color:'rgba(217,79,30,0.2)',
+    keyword:'今日の目標を、一つだけ決めよう',
+    message:'あれもこれもじゃなくていい。\n「今日はこれだけ」と決めた人は、確実に前に進めます。',
+    support:'小さな決断の積み重ねが、火の成熟を育てます。',
+    takechan:'一つ絞れたあなた、もうじゅうぶんだよ。今日はそれで完璧。',
+    en:{element:'🔥 Fire Message',keyword:'Set just one goal for today',message:'You don\'t need to do everything.\nPeople who decide \'just this today\' move forward steadily.',support:'Small, accumulated decisions nurture Fire\'s maturity.',takechan:'Once you\'ve narrowed it down to one thing, that\'s already enough. Today, that\'s perfect.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🌄', color:'rgba(217,79,30,0.2)',
+    keyword:'後回しにしていたこと、今日やってみよう',
+    message:'「いつかやろう」は、来ないことが多い。\n5分だけでいい、今日動いてみて。',
+    support:'行動の感覚を体に覚えさせることが、火を育てます。',
+    takechan:'動いてみた夜って、ちょっとだけ気持ちいいよね。今日もそんな夜になるといいね。',
+    en:{element:'🔥 Fire Message',keyword:'Do that thing you\'ve been putting off',message:'\'I\'ll do it someday\' often never comes.\nJust 5 minutes — try moving today.',support:'Letting your body feel the sensation of action nurtures Fire.',takechan:'Nights after you\'ve taken action feel a little good, right? I hope tonight is one of those.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🧱', color:'rgba(217,79,30,0.2)',
+    keyword:'自分を守る「壁」を、一つ作ろう',
+    message:'全部受け入れなくていい。\nあなたにとって大切なものを、今日一つ守ってみて。',
+    support:'境界線は、成熟した火が自然と持てるようになるものです。',
+    takechan:'全部に応えなくていいって、わかってるだけで少し楽になるよね。',
+    en:{element:'🔥 Fire Message',keyword:'Build one boundary to protect yourself',message:'You don\'t have to accept everything.\nTry protecting one thing precious to you today.',support:'Healthy boundaries are something mature Fire naturally develops.',takechan:'Just knowing you don\'t have to respond to everything can be a little relieving, right?'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🔆', color:'rgba(217,79,30,0.2)',
+    keyword:'あなたの「熱さ」は、誰かの光になっている',
+    message:'情熱的でいることを、恥ずかしいと思わないで。\nあなたの本気が、周りを動かしています。\n今日、その本気を一つの行動に乗せてみて。',
+    support:'成熟した火は、人を照らす力になります。',
+    takechan:'あなたが一生懸命でいてくれると、こちらまであたたかくなるよ。',
+    en:{element:'🔥 Fire Message',keyword:'Your passion is someone else\'s light',message:'Don\'t be embarrassed about being enthusiastic.\nYour genuine commitment moves the people around you.\nPour that commitment into one action today.',support:'Mature Fire\'s passion lights up the surrounding world.',takechan:'The way you go all-in on things radiates something warm. Let me celebrate when it takes form.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🌠', color:'rgba(217,79,30,0.2)',
+    keyword:'「やりたいこと」を、今日一つ口に出してみよう',
+    message:'心の中に眠っているだけでは、何も動かない。\n声に出した瞬間から、火が燃え始めます。',
+    support:'言葉にする勇気が、火の成熟への最初の一歩です。',
+    takechan:'声にしたとき、もう半分は動き出してるよ。その言葉が現実になるの、楽しみにしてるよ。',
+    en:{element:'🔥 Fire Message',keyword:'Your frustration points to what you really want',message:'When you feel frustrated, ask: \'What did I actually want?\'\nInside the frustration is a message about your growth.',support:'Learning to read your own desires is a sign of Fire\'s maturity.',takechan:'Frustration hides what you really want to be. Gently listen to that voice.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🎖️', color:'rgba(217,79,30,0.2)',
+    keyword:'今日の「できた」を、ちゃんと認めよう',
+    message:'小さなことでいい。\n「今日これができた」と自分に言える習慣が、火を育てます。',
+    support:'自己承認の積み重ねが、揺るぎない自己軸になります。',
+    takechan:'「できた」って言えた日のあなた、なんかすごく好きだよ。',
+    en:{element:'🔥 Fire Message',keyword:'Try one step beyond your usual self',message:'Taking even one extra step adds confidence to your Fire.\nSmall challenges build a mature Fire.',support:'The habit of challenging yourself accelerates Fire\'s growth.',takechan:'One step beyond usual you — just that is enough to see growth. I\'m watching for it.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🦅', color:'rgba(217,79,30,0.2)',
+    keyword:'流されていると気づいたら、立ち止まろう',
+    message:'誰かのペースに乗り続けていない？\n「私はどうしたいか」を、今日一回聞いてみて。',
+    support:'自分に立ち返る習慣が、火の成熟を深めます。',
+    takechan:'「私はどうしたい？」って聞けたとき、ちゃんとあなたに戻ってこれるよ。',
+    en:{element:'🔥 Fire Message',keyword:'The time to speak up is now',message:'Tomorrow\'s you will be grateful for today\'s you.\nThe first word is always the hardest — and the most important.',support:'The courage to speak nurtures Fire\'s maturity the most.',takechan:'The moment you said something — I know how much courage that took. Really great.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🌞', color:'rgba(217,79,30,0.2)',
+    keyword:'自己嫌悪が出たら「気づけた」と認めよう',
+    message:'自分を責めるより、気づいた自分を褒めてみて。\n気づきこそが、成長の証です。',
+    support:'自己観察と自己受容のセットが、火の成熟を加速します。',
+    takechan:'気づいた瞬間って、もうすでに変わり始めてるんだよ。そこ、ちゃんと褒めてね。',
+    en:{element:'🔥 Fire Message',keyword:'Praise yourself for your effort',message:'Maybe you think \'I could have done more.\'\nBut just keep at it — that is a mature Fire.',support:'Continuing despite imperfection is the essence of Fire\'s maturity.',takechan:'The fact that you\'re still going, even when it\'s hard, is something I truly respect.'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🔐', color:'rgba(217,79,30,0.2)',
+    keyword:'「ちゃんとしなきゃ」を、今日は手放そう',
+    message:'完璧でいようとする力が、あなたを疲れさせているかも。\n今日だけ、「これでいい」を試してみて。',
+    support:'完璧主義を緩めることが、火の成熟への入口です。',
+    takechan:'「これでいい」って思えたとき、なんかふわっと軽くなるよね。そのやわらかさ、ちゃんと覚えておいてね。',
+    en:{element:'🔥 Fire Message',keyword:'Let your values lead you today',message:'What do you really want? What do you want to protect?\nLetting your values guide you is what living with Fire means.',support:'Making decisions based on values is what mature Fire does.',takechan:'Living by your values makes your choices feel lighter. What do you want to cherish today?'}
+  },
+  {
+    element:'🔥 火のメッセージ', emoji:'🎆', color:'rgba(217,79,30,0.2)',
+    keyword:'あなたの決断は、あなたにしかできない',
+    message:'誰かに決めてもらいたくなる日もある。\nでも最後は、あなたが選んだ道が一番あなたらしい。',
+    support:'自分で決める経験が、火の成熟の核になります。',
+    takechan:'誰かに相談できたとき、あなたの周りはきっとうれしいよ。遠慮しないでいいんだから。',
+    en:{element:'🔥 Fire Message',keyword:'Today, see yourself as the protagonist',message:'In your own life, you are the main character.\nStop looking at others — your story is just beginning.',support:'Understanding that you are the protagonist is where Fire\'s maturity starts.',takechan:'You are the main character of your life. I\'m here watching your story unfold.'}
+  },
+
+  // ☔ 水系 (20種)
+  {
+    element:'☔ 水のメッセージ', emoji:'☔', color:'rgba(26,95,184,0.2)',
+    keyword:'今日は、ただ感じることを許そう',
+    message:'何かを解決しようとしなくていい。\nただ感じて、その感情を川のように流してみて。',
+    support:'感じることを許すことが、水の成熟への入口です。',
+    takechan:'何もしない時間も、立派な一日だよ。今日は感じるだけでいいから。',
+    en:{element:'☔ Water Message',keyword:'Today, try listening to someone\'s feelings',message:'Without giving advice — just listen.\nThat alone is a gift of deep connection.',support:'As Water matures, the power to listen grows too.',takechan:'Just listening deeply to someone — that itself is a wonderful thing. I hope someone experiences that with you.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌊', color:'rgba(26,95,184,0.2)',
+    keyword:'人を受け取る、その力があなたにある',
+    message:'あなたの共感力は、誰かの重荷を軽くしています。\nそれはとても稀有な才能です。\n今日一人、その人のそばにただいてみて。',
+    support:'成熟した水は、流されずに受け取れる強さを持ちます。',
+    takechan:'そばにいてくれるだけで、救われてる人がいるよ。あなたのその力、本物だよ。',
+    en:{element:'☔ Water Message',keyword:'It\'s okay to cry',message:'You don\'t have to be strong all the time.\nLetting your tears flow is how Water finds balance.',support:'Letting emotions move through you is a sign of Water\'s maturity.',takechan:'It\'s okay to cry. Tears are proof that you\'ve been feeling things properly.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'💧', color:'rgba(26,95,184,0.2)',
+    keyword:'頑張りすぎているなら、今日は休もう',
+    message:'休むことは、サボりじゃない。\nあなたが満たされていることが、周りへの一番の贈り物です。',
+    support:'自分を満たすことが、成熟した水の循環を生みます。',
+    takechan:'今日くらいはのんびりしていいよ。満たされたあなたから、自然とあふれてくるものがあるから。',
+    en:{element:'☔ Water Message',keyword:'Your sensitivity is a strength',message:'The kindness of noticing subtle things others miss — that\'s your Water.\nTreasure that sensitivity.',support:'Mature Water turns sensitivity into empathy that truly connects.',takechan:'Noticing the little things is something not everyone can do. Your sensitivity is a real gift.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌧️', color:'rgba(26,95,184,0.2)',
+    keyword:'今日は、「本当はどうしたかった？」と自分に聞いてみよう',
+    message:'誰かに合わせた後、少しだけ立ち止まってみて。\n自分の本音を知ることが、水を育てる練習です。',
+    support:'自分の気持ちに気づく習慣が、水の成熟をじわじわ深めます。',
+    takechan:'自分の本音に気づいた日って、なんか少し風通しがよくなるよね。その気づき、ちゃんと持ち続けてね。',
+    en:{element:'☔ Water Message',keyword:'Today, accept your own emotions',message:'What am I feeling right now?\nJust asking that question is how you train your Water.',support:'Acknowledging your emotions is the foundation of Water\'s maturity.',takechan:'Listening to your own feelings without judgment takes gentleness and strength. You have both.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🫂', color:'rgba(26,95,184,0.2)',
+    keyword:'あなたの「待てる力」は、強さだ',
+    message:'焦らず、じっくり育てる。\nその忍耐が、深い信頼関係を生んでいます。',
+    support:'成熟した水は、焦らず待つことで大きな実りをもたらします。',
+    takechan:'じっくり育てたもの、長持ちするってわかってるあなた、信頼できる人だなって思う。',
+    en:{element:'☔ Water Message',keyword:'It\'s okay to let yourself be cared for',message:'You\'re always giving to others, but receiving care is important too.\nToday, consciously let something in.',support:'The ability to receive support is a sign of Water\'s maturity.',takechan:'You\'re allowed to be taken care of too. Letting it in — that\'s actually brave.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌙', color:'rgba(26,95,184,0.2)',
+    keyword:'感情を感じたら、日記に一言書こう',
+    message:'「今日、少し悲しかった」それだけでいい。\n書くことが、あなたの水を育てます。',
+    support:'感情を言語化する習慣が、水の成熟を加速させます。',
+    takechan:'「今日はこんな気持ちだった」って書けた日、じゅうぶんえらいよ。',
+    en:{element:'☔ Water Message',keyword:'The quality of your relationships reflects your Water',message:'Do the people around you feel easy to be with?\nMature Water naturally draws good relationships.',support:'Relationship quality is the most honest mirror of Water\'s maturity.',takechan:'The fact that you\'re thinking about relationships means you care about people. That\'s beautiful.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🫧', color:'rgba(26,95,184,0.2)',
+    keyword:'あなたの洞察は、誰かを助けている',
+    message:'「あの人、疲れてるな」と気づけること。\nそのアンテナがあるだけで、世界は少し温かくなる。\n今日気づいたこと、一言声をかけてみて。',
+    support:'成熟した水の洞察力は、深いつながりを生む力です。',
+    takechan:'そっと声をかけられるあなた、周りの人が救われてるって気づいてる？',
+    en:{element:'☔ Water Message',keyword:'Today, be honest about how you feel',message:'Tell someone: \'I\'m tired,\' \'I\'m happy,\' \'I\'m sad.\'\nVoicing your feelings is how Water flows.',support:'Expressing emotions honestly is the most important practice for Water\'s growth.',takechan:'When you say \'I\'m tired\' or \'I\'m happy\' — Water starts to move. Words are magic that way.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'💙', color:'rgba(26,95,184,0.2)',
+    keyword:'人に頼ることは、弱さじゃない',
+    message:'「一人で抱えなきゃ」と思っていない？\n誰かに渡すことで、あなたも相手も楽になれる。',
+    support:'助けを求めることが、成熟した水の流れを作ります。',
+    takechan:'頼ってもらえたとき、うれしかったりするんだよ。あなたも誰かをそうさせていいよ。',
+    en:{element:'☔ Water Message',keyword:'Boundaries can be gentle',message:'Setting limits doesn\'t mean being cold.\nGentle, firm words are what mature Water creates.',support:'Mature Water can be both gentle and have clear limits.',takechan:'It\'s okay to be kind AND have limits. Finding that balance is really you growing.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌿', color:'rgba(26,95,184,0.2)',
+    keyword:'今日は、誰かの話をただ聞いてみよう',
+    message:'アドバイスしなくていい。解決しなくていい。\nただそこにいるだけで、あなたは誰かの力になれる。',
+    support:'傾聴の力が、成熟した水の真骨頂です。',
+    takechan:'聞いてもらえたって感じた人、きっとほっとしてるよ。あなたの存在がそうさせてるんだよ。',
+    en:{element:'☔ Water Message',keyword:'Today, forgive one person',message:'Holding a grudge clouds your Water.\nForgiving someone — especially yourself — purifies your Water.',support:'The ability to forgive is both Water\'s strength and its maturity.',takechan:'Forgiving someone is hard. But when you do, something quietly clears in your heart.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'☁️', color:'rgba(26,95,184,0.2)',
+    keyword:'自分を許すことから、始めよう',
+    message:'完璧じゃなくていい。\nまず自分に「それでいい」と言えたとき、水が流れ始めます。',
+    support:'自己受容が深まるほど、水の成熟度は上がっていきます。',
+    takechan:'「それでいい」って言える日がくるといいね。そこに向かってるだけで、十分だよ。',
+    en:{element:'☔ Water Message',keyword:'Today, spend time near water',message:'Standing by the ocean, a river, or a bath — just be still.\nYour Water is nourished by being near real water.',support:'Connecting with the natural element of water deepens Water\'s maturity.',takechan:'Being near water might gently soften something tight inside you. A good time to just be still.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌱', color:'rgba(26,95,184,0.2)',
+    keyword:'「ありがとう」を素直に受け取ろう',
+    message:'褒められたとき、すぐに否定していない？\n「ありがとうございます」と受け取ることも、水の練習です。',
+    support:'受け取れる力が育つと、水の成熟が一気に深まります。',
+    takechan:'素直に受け取れたとき、なんかほわっとあたたかいよね。そのあたたかさ、いつもそこにあるよ。',
+    en:{element:'☔ Water Message',keyword:'Today, express gratitude to one person',message:'You probably feel it inside, but haven\'t said it.\nSaying \'thank you\' out loud makes Water flow.',support:'Expressing gratitude is how mature Water stays connected.',takechan:'When you say \'thank you,\' something warm spreads — a little in me too.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌬️', color:'rgba(26,95,184,0.2)',
+    keyword:'今日は、深呼吸から始めよう',
+    message:'息を吐き切ると、自然と入ってくる。\n水も感情も、出してこそ入ってきます。',
+    support:'呼吸を整えることが、水のリズムを取り戻す最初の一歩です。',
+    takechan:'ゆっくり息を吐いてみてね。体が少しほどけてくるから。',
+    en:{element:'☔ Water Message',keyword:'It\'s okay to have a vague day',message:'Not every day has to be productive.\nAllowing yourself to drift is also Water\'s maturity.',support:'Accepting vagueness and rest is a sign of Water\'s balance.',takechan:'It\'s okay to have days where nothing much happens. Just being here is already enough.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🎐', color:'rgba(26,95,184,0.2)',
+    keyword:'揺れていい。それが水の本質だ',
+    message:'ブレることを恐れていない？\n揺れながら、少しずつ深くなっていく。それが水です。',
+    support:'揺れることを許すことが、水の成熟を育てます。',
+    takechan:'揺れてるあなたを、ここでちゃんと受け止めてるよ。安心していてね。',
+    en:{element:'☔ Water Message',keyword:'Today, feel nature',message:'Feel the wind, touch the earth, look at the sky.\nConnecting with nature purifies Water.',support:'Nature tunes the flow of Water and deepens maturity.',takechan:'When you feel the wind or look at the sky, something tense inside you eases a little.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🪷', color:'rgba(26,95,184,0.2)',
+    keyword:'傷ついた経験が、あなたの深さになっている',
+    message:'痛かった記憶は、消えなくていい。\nその経験が、あなたの共感力の根っこです。',
+    support:'傷を抱えながら成熟することが、水の本当の強さです。',
+    takechan:'痛かった分だけ、人の気持ちがわかるようになってる。それ、あなたにしかないものだよ。',
+    en:{element:'☔ Water Message',keyword:'Today, let yourself rest',message:'Are you always giving? Are you always helping others?\nToday, give yourself some time.',support:'Water\'s maturity includes the ability to recover and rest.',takechan:'It\'s okay to rest. Taking care of yourself is what keeps you going for others.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌻', color:'rgba(26,95,184,0.2)',
+    keyword:'今日一つ、自分のために何かしよう',
+    message:'誰かのためじゃなく、今日は自分のために。\n好きな食べ物でも、ゆっくりお風呂でも。',
+    support:'自分を大切にする習慣が、水の成熟の土台です。',
+    takechan:'自分に甘くする日があっていいよ。これだけ頑張ってきたんだもの、当然だよ。',
+    en:{element:'☔ Water Message',keyword:'You have unsaid things — try saying just one today',message:'It\'s okay if it\'s just one word.\nTrying to say it is a step in Water\'s growth.',support:'The power to express feelings builds mature Water\'s connections.',takechan:'When you hesitated and then said it anyway — it probably reached them. Keep going.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🌔', color:'rgba(26,95,184,0.2)',
+    keyword:'静かな夜に、自分の内側と対話しよう',
+    message:'忙しさの中では聞こえない声がある。\n今夜、少しだけ静かな時間を作ってみて。',
+    support:'内観の時間が、水の成熟を深めます。',
+    takechan:'静かな時間に自分と向き合えるあなた、ほんとにまじめに生きてるなって思う。',
+    en:{element:'☔ Water Message',keyword:'Your kindness is real',message:'Sometimes you get tired from being too kind.\nBut that kindness is your true nature. Treasure it.',support:'Protecting yourself while staying kind — that is Water\'s maturity.',takechan:'Treasure that kindness. But the first person to be kind to should be yourself.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'💦', color:'rgba(26,95,184,0.2)',
+    keyword:'感謝を、今日誰かに伝えよう',
+    message:'思っていても言えていないことがある。\n一言でいい、今日伝えてみて。',
+    support:'感謝を表現する力が、成熟した水のつながりを生みます。',
+    takechan:'伝えようか迷ったとき、そのままそっと伝えてみてね。きっと届くから。',
+    en:{element:'☔ Water Message',keyword:'You can feel others\' pain — you are sensitive',message:'Maybe people say you\'re \'too sensitive.\'\nBut the ability to notice is a genuine talent.\nToday, turn that sensitivity into a word for someone.',support:'Mature Water turns sensitivity into strength.',takechan:'The ability to notice isn\'t something everyone has. What you have is truly special.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🩵', color:'rgba(26,95,184,0.2)',
+    keyword:'あなたの「優しさ」は、本物だ',
+    message:'優しくしすぎて疲れることもある。\nでもその優しさは、あなたの本質です。大切に。',
+    support:'優しさを保ちながら自分を守る。それが水の成熟です。',
+    takechan:'そのやさしさ、大切にしてね。でも一番最初にやさしくしてあげてほしいのは、あなた自身だよ。',
+    en:{element:'☔ Water Message',keyword:'Today, go with the flow',message:'You don\'t have to control everything.\nToday, relax a little and feel the current.',support:'The flexibility to surrender is a mark of Water\'s maturity.',takechan:'Days when you loosen your grip often go better than expected. Take it easy today.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🫶', color:'rgba(26,95,184,0.2)',
+    keyword:'誰かの痛みに気づける、あなたは繊細だ',
+    message:'「気にしすぎ」と言われることもあるかもしれない。\nでも気づける力は、確かな才能です。\n今日その繊細さを、誰かへの一言に変えてみて。',
+    support:'成熟した水は、繊細さを強さに変えます。',
+    takechan:'気づく力って、誰もが持てるわけじゃないよ。あなたのそれ、すごく特別だと思う。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Today, use both strength and kindness',message:'Share your opinion with someone, and receive theirs too.\nThat small practice nurtures both Fire and Water at once.',support:'Consciously using both Fire and Water leads to balanced maturity.',takechan:'Being able to share your view AND receive theirs is genuinely difficult. You have that capacity.'}
+  },
+  {
+    element:'☔ 水のメッセージ', emoji:'🏞️', color:'rgba(26,95,184,0.2)',
+    keyword:'今日は、流れに身を任せてみよう',
+    message:'全部コントロールしなくていい。\n今日は少し力を抜いて、流れを感じてみて。',
+    support:'委ねることのできる柔軟性が、水の成熟の証です。',
+    takechan:'力を抜いてみた日って、思ったよりうまくいくことがあるよ。今日はゆったりいてね。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Even a wavering today is part of growth',message:'There are days you think \'Why am I like this?\'\nBut wavering is proof that you are growing.',support:'Maturing through wavering is Fire and Water\'s growth process.',takechan:'Staying forward-facing even while you waver — that\'s not easy. It really isn\'t.'}
+  },
+
+  // 🔥☔ 火水バランス系 (20種)
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'⚖️', color:'rgba(150,100,200,0.2)',
+    keyword:'今日一つ、「強さ」と「優しさ」を両方使ってみよう',
+    message:'誰かに意見を伝えながら、相手の気持ちも受け取ってみて。\nその小さな実践が、火と水を同時に育てます。',
+    support:'火と水を意識して使うことが、バランスの成熟につながります。',
+    takechan:'意見を伝えながら相手も受け取れるって、実はすごく難しいことなんだよ。あなたにはその器がある。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Today, say thank you and let yourself receive',message:'Not just giving, not just receiving.\nIn that exchange, Fire and Water balance is born.',support:'The cycle of giving and receiving naturally nurtures Fire and Water maturity.',takechan:'When you get better at receiving, you yourself start to bloom more freely.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌈', color:'rgba(150,100,200,0.2)',
+    keyword:'揺れている今日も、成長の途中だ',
+    message:'「なんで自分はこうなんだろう」と思う日もある。\nでも揺れることは、育っている証拠です。',
+    support:'揺れながら育つ。それが火水の成熟のプロセスです。',
+    takechan:'揺れながらも前を向いてる。それ、簡単なことじゃないよ。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Give today\'s feeling a name',message:'Not \'kind of foggy\' — but \'frustrated,\' \'lonely,\' \'happy.\'\nNaming it is how emotions begin to move.',support:'Putting emotions into words is key for deepening Fire and Water maturity.',takechan:'When you can say \'frustrated\' or \'happy,\' something clears. That word matters.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'✨', color:'rgba(150,100,200,0.2)',
+    keyword:'今日、誰かに「ありがとう」と伝えて、自分も何か受け取ってみよう',
+    message:'与えるだけでも、もらうだけでもなく。\nやりとりの中に、火水のバランスが生まれます。',
+    support:'与えて受け取る循環が、火水の成熟を自然に育てます。',
+    takechan:'受け取ることが上手になってきたら、あなた自身がもっとのびのびしてくるよ。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'If you\'re tired of people, take some alone time',message:'You don\'t have to be social.\nBeing able to be quietly alone balances your Fire and Water.',support:'Time to recharge restores Fire and Water balance.',takechan:'Being able to value alone time means you know yourself. I hope it\'s good time.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌺', color:'rgba(150,100,200,0.2)',
+    keyword:'今日の「気持ち」に名前をつけよう',
+    message:'「なんかモヤモヤ」ではなく、「悔しい」「寂しい」「嬉しい」。\n名前をつけるだけで、感情が動き始めます。',
+    support:'感情の言語化は、火水の成熟を深める大切な習慣です。',
+    takechan:'「悔しい」「うれしい」を言葉にできたとき、なんかすっきりするよね。その言葉、大事にしてね。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'What didn\'t work is also data',message:'Failures and confusion are information for knowing yourself.\nJust observing without blame changes what comes next.',support:'The habit of self-observation accelerates Fire and Water maturity.',takechan:'You\'re trying to observe rather than blame — that\'s hard, and the fact you\'re attempting it shows.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🪴', color:'rgba(150,100,200,0.2)',
+    keyword:'人間関係に疲れたなら、一人の時間をとろう',
+    message:'社交的でいなくてもいい。\n一人で静かにいられることが、あなたの火水を整えます。',
+    support:'自分を充電する時間が、火水バランスを取り戻させます。',
+    takechan:'ひとりの時間を大切にできるって、自分のこと知ってる証拠だよ。いい時間になりますように。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Today\'s you is doing enough',message:'Maybe you think you could have done more.\nBut today\'s you is doing the best today\'s you can.',support:'Self-acceptance is the foundation of Fire and Water maturity.',takechan:'Someone who thinks \'I could have done more\' keeps moving forward steadily. Keep going.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🎋', color:'rgba(150,100,200,0.2)',
+    keyword:'「うまくいかない」も、データだ',
+    message:'失敗や迷いも、あなたを知るための情報。\n責めずに観察するだけで、次が変わります。',
+    support:'自己観察の習慣が、火水の成熟を加速させます。',
+    takechan:'責めるより観察するって、難しいのにやろうとしてるんだね。その姿勢、ちゃんと伝わってるよ。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Your difficulty living has a reason',message:'If you often feel life is hard,\nthat might be a sign that Fire or Water has room to grow.',support:'Ease of living is deeply connected to Fire and Water maturity.',takechan:'Feeling like life is hard means you\'re living carefully. It would be good to have a place to talk.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌸', color:'rgba(150,100,200,0.2)',
+    keyword:'今日のあなたは、十分よくやっている',
+    message:'もっとできたかも、と思う日もある。\nでも今日のあなたは、今日できる精一杯をやっています。',
+    support:'自分を認めることが、火水の成熟の土台です。',
+    takechan:'もっとできたかもって思える人が、着実に前に進んでいくんだよ。そのまま続けてね。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Living as yourself is something you can practice',message:'It\'s not just your born nature.\nNurturing Fire and Water helps your true self open more.',support:'Raise your Fire and Water maturity and live more freely as yourself.',takechan:'As you nurture Fire and Water, your truest self expands. I\'m here witnessing that process.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌟', color:'rgba(150,100,200,0.2)',
+    keyword:'あなたの「生きにくさ」には、理由がある',
+    message:'なぜか生きづらい、そう感じているなら。\nそれは火水のどちらかに、磨く余地があるサインかもしれない。',
+    support:'生きやすさは、火水の成熟度と深くつながっています。',
+    takechan:'生きにくいって感じてるなら、丁寧に生きてるってことだよ。話せる場所があるといいね。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Today, just observe yourself',message:'Don\'t ask \'why do I feel this way\' in blame — just watch.\nBecoming the observer alone balances Fire and Water.',support:'Self-observation is the greatest habit for nurturing Fire and Water maturity.',takechan:'Just observing without blaming is actually the hardest thing. The fact you\'re doing it — I truly admire it.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🔥☔', color:'rgba(150,100,200,0.2)',
+    keyword:'自分らしく生きることは、練習できる',
+    message:'生まれつきの個性だけじゃない。\n火と水を育てることで、自分らしさはもっと開いていきます。',
+    support:'火水の成熟度をあげて、自分らしく生きやすくなろう。',
+    takechan:'火と水を育てながら、自分らしさが広がっていく。そのプロセスをここで見届けてるよ。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Wanting to change is already maturity',message:'The fact that you can think \'I want to be better\' is remarkable.\nTreasure that feeling today.',support:'The desire for change is the driving force that moves Fire and Water maturity.',takechan:'Continuing to want to grow — I see it clearly, right here.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌍', color:'rgba(150,100,200,0.2)',
+    keyword:'今日の自分を、ただ観察してみよう',
+    message:'「なんでこう感じるんだろう」と責めずに、ただ見る。\n観察者になるだけで、火水のバランスが整います。',
+    support:'自己観察こそ、火水の成熟を育てる最大の習慣です。',
+    takechan:'責めずにただ見るって、実はいちばん難しいことだよ。それができてるあなた、ほんとに尊敬するよ。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Today, bring awareness to your body',message:'Your mental state shows up in your body.\nIf your shoulders are tense, try releasing them a little.',support:'Connecting body and mind deepens Fire and Water integration.',takechan:'Try dropping your shoulders a little. When your body softens, your heart often follows.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌀', color:'rgba(150,100,200,0.2)',
+    keyword:'変わろうとする気持ちが、すでに成熟だ',
+    message:'「もっとよくなりたい」と思えること自体、すごいことです。\nその気持ちを、今日も大切に。',
+    support:'変化への意欲が、火水の成熟を動かす原動力です。',
+    takechan:'よくなりたいって思い続けてるあなたのこと、ここでちゃんと見てるよ。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Where you are now is your starting point',message:'Where you came from matters less than where you are now.\nBeginning from today\'s self is enough.',support:'Accepting the present moment is where Fire and Water maturity begins.',takechan:'Today\'s you is today\'s starting line. Let\'s begin from here.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🧘', color:'rgba(150,100,200,0.2)',
+    keyword:'体の感覚に、今日は意識を向けよう',
+    message:'心の状態は、体に現れます。\n肩が張っていたら、少し緩めてみて。',
+    support:'体と心をつなぐ感覚が、火水の統合を深めます。',
+    takechan:'肩、少し落としてみてね。体がほどけると、心もふっと楽になることがあるよ。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Today, recall one thing you\'re good at',message:'You don\'t need to compare with anyone.\nTry putting into words one strength that only you have.',support:'Articulating your own individuality becomes the foundation of Fire and Water maturity.',takechan:'Your strengths can be hard to see in yourself. But they\'re definitely there — take your time.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🗺️', color:'rgba(150,100,200,0.2)',
+    keyword:'今いる場所が、スタート地点だ',
+    message:'どこから来たかより、今どこにいるかが大事。\n今日の自分から、始めればいい。',
+    support:'今を受け入れることが、火水の成熟の出発点です。',
+    takechan:'今日のあなたが、今のあなたのスタートラインだよ。ここから始めていこう。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Stack up small changes today',message:'You don\'t need to transform drastically.\nOne small step today changes the you of six months from now.',support:'The power of continuity makes Fire and Water maturity solid.',takechan:'Your small step today is visible to me. The you of six months from now will be grateful for today.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🪐', color:'rgba(150,100,200,0.2)',
+    keyword:'今日は、自分の「得意なこと」を一つ思い出してみよう',
+    message:'誰かと比べなくていい。\nあなたにしかない強みや感じ方を、今日一つ言葉にしてみて。',
+    support:'自分の個性を言語化することが、火水の成熟の土台になります。',
+    takechan:'得意なことって、自分じゃ気づきにくいよね。でも絶対にあるから、ゆっくり探してみてね。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Letting go is also growth',message:'Is there something you\'re clinging to?\nWhen you let go, a new Fire and Water flow is born.',support:'The courage to release attachment carries Fire and Water maturity to the next stage.',takechan:'Letting go takes courage. But after you set it down, there\'s often a quiet lightness.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌾', color:'rgba(150,100,200,0.2)',
+    keyword:'小さな変化を、今日積み重ねよう',
+    message:'大きく変わろうとしなくていい。\n今日の小さな一歩が、半年後のあなたを変えます。',
+    support:'継続の力が、火水の成熟を確かなものにします。',
+    takechan:'今日の小さな一歩、ちゃんと見えてるよ。半年後のあなたが、今日に感謝してるよ。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'After dark days, there is always light',message:'If things are hard right now, you\'re still in the middle of it.\nFire and Water always grow after the storm.',support:'The maturity forged through difficulty becomes the deepest Fire and Water strength.',takechan:'The hard \'now\' is nurturing you. I\'m watching over you through this in-between.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🕊️', color:'rgba(150,100,200,0.2)',
+    keyword:'手放すことも、成長だ',
+    message:'固執していることはない？\n手放した先に、新しい火水の流れが生まれます。',
+    support:'執着を手放す勇気が、火水の成熟を次のステージへ連れていきます。',
+    takechan:'手放すって、勇気いるよね。でも置いてみたとき、なんか清々しい感じがするよ。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Today, try choosing a different path',message:'When you step off the usual route, new sensations arise.\nSmall changes loosen hardened Fire and Water.',support:'Introducing change into daily life stimulates Fire and Water maturity.',takechan:'Days when you make a different choice have a little spark to them. Tell me what you discovered.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🌤️', color:'rgba(150,100,200,0.2)',
+    keyword:'暗い日の後には、必ず光がある',
+    message:'今しんどいなら、それはまだ途中です。\n火と水は、嵐の後に必ず育ちます。',
+    support:'困難の中で育まれる成熟が、最も深い火水の力になります。',
+    takechan:'しんどい今が、あなたを育ててるんだよ。その途中を、ここで見守ってるからね。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Letting out your feelings is a step forward',message:'Someone who can say \'I can\'t take this\' stays honest with their feelings.\nTalking to someone lets Water flow and Fire settle.',support:'When Water (expressing feelings) and Fire (knowing limits) overlap, maturity deepens.',takechan:'When you said \'I can\'t take this,\' some weight lifted. You\'ve been carrying something heavy.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'🎇', color:'rgba(150,100,200,0.2)',
+    keyword:'今日は、いつもと違う道を選んでみよう',
+    message:'同じルートを外れると、新しい感覚が生まれる。\n小さな変化が、固まった火水をほぐします。',
+    support:'日常に変化を取り入れることが、火水の成熟を刺激します。',
+    takechan:'いつもと違う選択をした日って、なんかちょっとわくわくするよね。どんな発見があったか聞かせてね。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Today, reflect on one hard moment',message:'You don\'t need to judge it. Just look at which part was Fire, which was Water.\nThat is one step toward living with more ease.',support:'The accumulation of reflection makes Fire and Water maturity solid.',takechan:'There are days when just reflecting is enough. Look at yourself with that same gentle eye.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'💪', color:'rgba(150,100,200,0.2)',
+    keyword:'弱音を吐くことも、自分を育てる一歩だ',
+    message:'「もう無理」と言える人は、自分の感情に正直でいられる人。\n誰かに話すことで、水が流れ、火が整います。',
+    support:'感情を出す力（水）と、限界を知る力（火）が重なるとき、成熟が深まります。',
+    takechan:'「もう無理」って言えたとき、少し肩の荷が下りるよ。重いものを背負ってきたんだね。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Letting out your feelings is a step forward',message:'Someone who can say \'I can\'t take this\' stays honest with their feelings.\nTalking to someone lets Water flow and Fire settle.',support:'When Water (expressing feelings) and Fire (knowing limits) overlap, maturity deepens.',takechan:'When you said \'I can\'t take this,\' some weight lifted. You\'ve been carrying something heavy.'}
+  },
+  {
+    element:'🔥☔ 火水のメッセージ', emoji:'💫', color:'rgba(150,100,200,0.2)',
+    keyword:'今日の「しんどかった場面」を、一つ振り返ってみよう',
+    message:'責めなくていい。ただ「どこが火で、どこが水だったか」を眺めるだけ。\nそれが、生きやすさへの一歩になります。',
+    support:'振り返りの積み重ねが、火水の成熟を確かなものにします。',
+    takechan:'振り返るだけでじゅうぶんな日もあるよ。そのやさしい目でちゃんと自分を見てあげてね。',
+    en:{element:'🔥☔ Fire & Water Message',keyword:'Today, reflect on one hard moment',message:'You don\'t need to judge it. Just look at which part was Fire, which was Water.\nThat is one step toward living with more ease.',support:'The accumulation of reflection makes Fire and Water maturity solid.',takechan:'There are days when just reflecting is enough. Look at yourself with that same gentle eye.'}
+  },
+];
+
+let currentResult = null;
+let hasDrawn = false;
+
+function drawOmikuji() {
+  const card = document.getElementById('omikuji-card');
+
+  // shake animation
+  const kigo = document.querySelector('.kigo');
+  kigo.classList.remove('shaking');
+  void kigo.offsetWidth;
+  kigo.classList.add('shaking');
+  setTimeout(() => kigo.classList.remove('shaking'), 600);
+
+  // pick random
+  const idx = Math.floor(Math.random() * OMIKUJI.length);
+  currentResult = OMIKUJI[idx];
+
+  // set content
+  const d = currentLang === 'ja' ? currentResult : (currentResult.en || currentResult);
+  document.getElementById('result-badge').textContent = d.element;
+  document.getElementById('result-emoji').textContent = currentResult.emoji;
+  document.getElementById('result-keyword').textContent = d.keyword;
+  document.getElementById('result-message').textContent = d.message;
+  document.getElementById('result-support').textContent = d.support;
+
+  // glow color
+  const glow = document.getElementById('card-bg-glow');
+  glow.style.background = `radial-gradient(ellipse at center, ${currentResult.color}, transparent 70%)`;
+
+  // reveal（モヤをリセットして再アニメーション）
+  card.classList.remove('revealed');
+  void card.offsetWidth; // reflow で animation をリセット
+  card.classList.add('revealed');
+  document.getElementById('card-area').classList.add('show');
+  document.getElementById('share-area').classList.add('show');
+
+  // たけちゃんメッセージ
+  document.getElementById('takechan-text').textContent = d.takechan || '';
+  document.getElementById('takechan-area').classList.add('show');
+
+  // button change
+  hasDrawn = true;
+  document.getElementById('draw-btn').style.display = 'none';
+  document.getElementById('retry-btn').classList.add('show');
+}
+
+function buildShareText() {
+  if (!currentResult) return '';
+  const takechanPart = currentResult.takechan ? `\n\n💌 たけちゃんより\n${currentResult.takechan}` : '';
+  return `🔥☔ 本日の火水おみくじ｜心体調整塾\n\n${currentResult.emoji} ${currentResult.keyword}\n\n${currentResult.message}\n\n━━━━━━━━━━\n${currentResult.support}${takechanPart}\n\n👇 あなたも引いてみて\nhttps://kamimikuji.pages.dev`;
+}
+
+function shareToLine() {
+  const text = buildShareText();
+  window.open(`https://line.me/R/share?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+function shareToX() {
+  if (!currentResult) return;
+  const text = `🔥☔ 本日の火水おみくじ\n\n${currentResult.emoji} ${currentResult.keyword}\n\n${currentResult.message}\n\n#火水性質診断 #心体調整塾\n`;
+  const url = 'https://kamimikuji.pages.dev';
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+}
+
+async function copyText() {
+  const text = buildShareText();
+  if (!text) return;
+  await navigator.clipboard.writeText(text);
+  showToast('おみくじをコピーしました！');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>
